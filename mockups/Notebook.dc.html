@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Field Notebook — starter page</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,500&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Kalam:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f3eee2;font-family:'Newsreader',Georgia,serif;color:#1f1c17}
+a{color:#1f1c17}a:hover{color:#6b6457}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+img{image-rendering:pixelated}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1180px; box-sizing: border-box; padding: 44px 72px 52px; display: flex; flex-direction: column; gap: 34px; background-color: #f3eee2; background-image: linear-gradient(rgba(31,79,143,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(31,79,143,0.07) 1px, transparent 1px); background-size: 24px 24px; color: #1f1c17; font-family: 'Newsreader', Georgia, serif; position: relative">
+
+  <header style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #1f1c17; padding-bottom: 14px">
+    <div style="display: flex; align-items: baseline; gap: 18px">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 600; letter-spacing: 3px">KANTO FIELD GUIDE</span>
+      <span style="font-style: italic; font-size: 20px; color: #6b6457">Team planner for Pokémon Red &amp; Blue</span>
+    </div>
+    <div role="group" aria-label="Game version" style="display: flex; align-items: center; gap: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 14px">
+      <span style="color: #6b6457">PLAYING</span>
+      <button type="button" aria-pressed="{{isRed}}" onClick="{{pickRed}}" style="{{redStyle}}">Red</button>
+      <button type="button" aria-pressed="{{isBlue}}" onClick="{{pickBlue}}" style="{{blueStyle}}">Blue</button>
+    </div>
+  </header>
+
+  <section style="display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 48px; align-items: end">
+    <div style="display: flex; flex-direction: column; gap: 18px">
+      <h1 style="margin: 0; font-size: 84px; line-height: 0.98; font-weight: 400; letter-spacing: -1.5px; text-wrap: balance">Six Pokémon. Eight badges. <em style="color: {{accent}}">One honest plan.</em></h1>
+      <p style="margin: 0; font-size: 23px; line-height: 1.4; max-width: 780px; color: #3a352c; text-wrap: pretty">Tell us your starter, how far you've gotten and what you can't do. We check all 151 against every level-up move, TM and HM they can actually learn in Red &amp; Blue, then build a team for the next gym or the whole run.</p>
+    </div>
+    <div style="position: relative; padding-bottom: 8px">
+      <p style="margin: 0; font-family: 'Kalam', cursive; font-size: 27px; line-height: 1.2; color: #1f4f8f; transform: rotate(-2.5deg)">No link cable? No friends nearby? Same. We plan around it.</p>
+      <svg width="120" height="90" viewBox="0 0 120 90" aria-hidden="true" style="position: absolute; right: 40px; bottom: -86px"><path d="M20 4 C 30 40, 70 50, 96 78" fill="none" stroke="#1f4f8f" stroke-width="2.5" stroke-linecap="round"/><path d="M84 76 L97 79 L94 66" fill="none" stroke="#1f4f8f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; align-items: center; gap: 16px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 2px">
+      <span>01 — YOUR STARTER</span><span style="flex-grow: 1; border-top: 1px solid #1f1c17"></span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px">
+      <sc-for list="{{starters}}" as="s" hint-placeholder-count="3">
+        <button type="button" aria-pressed="{{s.selected}}" onClick="{{s.pick}}" style="{{s.cardStyle}}">
+          <div style="display: flex; gap: 20px; align-items: center">
+            <div style="width: 124px; height: 124px; flex-shrink: 0; border-radius: 50%; border: 2px dotted #6b6457; display: flex; align-items: center; justify-content: center; background: #fbf8f0">
+              <img src="{{s.img}}" alt="{{s.name}}" style="width: 128px; height: 128px; image-rendering: pixelated">
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #6b6457">No. {{s.num}}</span>
+              <span style="font-size: 36px; line-height: 1">{{s.name}}</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 1px">{{s.type}}</span>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 38px minmax(0, 1fr) 30px; gap: 5px 10px; align-items: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px">
+            <sc-for list="{{s.stats}}" as="t" hint-placeholder-count="5">
+              <span style="color: #6b6457">{{t.k}}</span>
+              <span style="height: 6px; background: #e3dccb; position: relative; display: block"><span style="{{t.bar}}"></span></span>
+              <span style="text-align: right">{{t.v}}</span>
+            </sc-for>
+          </div>
+          <div style="border-top: 1px dashed #6b6457; padding-top: 12px; display: flex; flex-direction: column; gap: 2px">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6b6457; letter-spacing: 1px">VS BROCK</span>
+            <span style="font-size: 20px; font-style: italic">{{s.brock}}</span>
+          </div>
+          <sc-if value="{{s.selected}}" hint-placeholder-val="{{false}}">
+            <span style="{{stampStyle}}">CHOSEN</span>
+          </sc-if>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display: flex; flex-direction: column; gap: 18px">
+    <div style="display: flex; align-items: center; gap: 16px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 2px">
+      <span>02 — HOW FAR ALONG ARE YOU?</span><span style="flex-grow: 1; border-top: 1px solid #1f1c17"></span>
+      <span style="font-family: 'Kalam', cursive; font-size: 20px; letter-spacing: 0; color: #1f4f8f">tap the last gym you beat</span>
+    </div>
+    <div style="position: relative; display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 0">
+      <div style="position: absolute; left: 5%; right: 5%; top: 21px; border-top: 3px dotted #1f1c17" aria-hidden="true"></div>
+      <sc-for list="{{stops}}" as="p" hint-placeholder-count="10">
+        <button type="button" aria-pressed="{{p.current}}" onClick="{{p.pick}}" style="position: relative; background: transparent; border: 0; padding: 0 4px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; min-height: 44px">
+          <span style="{{p.dot}}"></span>
+          <span style="font-size: 19px; line-height: 1.1">{{p.city}}</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6b6457; line-height: 1.3">{{p.who}}</span>
+          <sc-if value="{{p.current}}" hint-placeholder-val="{{false}}">
+            <span style="{{pinStyle}}">YOU ARE HERE</span>
+          </sc-if>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; margin-top: 18px">
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; align-items: center; gap: 16px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 2px">
+        <span>03 — HOUSE RULES</span><span style="flex-grow: 1; border-top: 1px solid #1f1c17"></span>
+      </div>
+      <sc-for list="{{rules}}" as="r" hint-placeholder-count="4">
+        <label style="display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 4px 12px; align-items: start; cursor: pointer; padding: 4px 0">
+          <input type="checkbox" checked="{{r.on}}" onChange="{{r.toggle}}" style="width: 22px; height: 22px; margin: 3px 0 0; accent-color: #1f1c17">
+          <span style="font-size: 22px; line-height: 1.2">{{r.label}}</span>
+          <span></span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; line-height: 1.5; color: #6b6457">{{r.note}}</span>
+        </label>
+      </sc-for>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; align-items: center; gap: 16px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; letter-spacing: 2px">
+        <span>04 — MUST-HAVES</span><span style="flex-grow: 1; border-top: 1px solid #1f1c17"></span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+        <div style="border: 2px solid #1f1c17; background: #fbf8f0; min-height: 92px; padding: 10px 12px; display: flex; align-items: center; gap: 10px; transform: rotate(-1deg)">
+          <img src="{{starterImg}}" alt="" style="width: 64px; height: 64px; image-rendering: pixelated">
+          <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 21px">{{starterName}}</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #6b6457">STARTER · LOCKED</span></div>
+        </div>
+        <label style="grid-column: span 2; border: 2px dashed #6b6457; min-height: 92px; padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; gap: 6px">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 1px; color: #6b6457">ADD A POKéMON YOU WANT TO USE</span>
+          <input type="text" placeholder="Try “Pikachu” or “Lapras”" style="border: 0; border-bottom: 1px solid #1f1c17; background: transparent; font-size: 22px; padding: 4px 0; min-height: 36px; outline-offset: 4px">
+        </label>
+        <div style="border: 2px dashed #b9b1a0; min-height: 60px; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6b6457">open</div>
+        <div style="border: 2px dashed #b9b1a0; min-height: 60px; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6b6457">open</div>
+        <div style="border: 2px dashed #b9b1a0; min-height: 60px; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6b6457">open</div>
+      </div>
+      <p style="margin: 4px 0 0; font-family: 'Kalam', cursive; font-size: 21px; color: #1f4f8f; transform: rotate(-1deg)">Leave slots open and we fill them with the best fits.</p>
+    </div>
+  </section>
+
+  <footer style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 32px; border-top: 2px solid #1f1c17; padding-top: 24px">
+    <div role="radiogroup" aria-label="Plan for" style="display: flex; align-items: center; gap: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 14px">
+      <span style="color: #6b6457; letter-spacing: 1px">PLAN FOR</span>
+      <button type="button" role="radio" aria-checked="{{goalNext}}" onClick="{{pickNext}}" style="{{nextStyle}}">{{nextLabel}}</button>
+      <button type="button" role="radio" aria-checked="{{goalAll}}" onClick="{{pickAll}}" style="{{allStyle}}">The whole run</button>
+    </div>
+    <button type="button" style="background: #1f1c17; color: #f3eee2; border: 0; min-height: 64px; padding: 0 40px; font-family: 'Newsreader', serif; font-size: 28px; font-style: italic; display: flex; align-items: center; gap: 16px">Plan my team <span aria-hidden="true" style="font-style: normal">→</span></button>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { version: 'red', starter: 'squirtle', badges: 0, goal: 'next', rules: { trade: false, legend: true, corner: true, hm: true } };
+  }
+  renderVals() {
+    const st = this.state;
+    const accent = st.version === 'red' ? '#b3301d' : '#1f4f8f';
+    const pill = on => 'min-height: 44px; padding: 0 18px; border: 1.5px solid #1f1c17; border-radius: 999px; background: ' + (on ? '#1f1c17' : 'transparent') + '; color: ' + (on ? '#f3eee2' : '#1f1c17') + '; font-family: "IBM Plex Mono", monospace; font-size: 14px;';
+    const S = [
+      { id: 'bulbasaur', name: 'Bulbasaur', num: '001', type: 'GRASS · POISON', img: '/_blob/93aee1d54d12bd3d7c519ff4da165d3f', s: [45, 49, 49, 65, 45], brock: 'Vine Whip at L13 hits both for 4×.' },
+      { id: 'charmander', name: 'Charmander', num: '004', type: 'FIRE', img: '/_blob/0e883bce5bc6dbbadaceb214d2b7f49b', s: [39, 52, 43, 50, 65], brock: 'Ember is resisted. You’ll want a helper.' },
+      { id: 'squirtle', name: 'Squirtle', num: '007', type: 'WATER', img: '/_blob/69c9636c01953afb0393e391d5172518', s: [44, 48, 65, 50, 43], brock: 'Bubble at L8 hits both for 4×.' },
+    ];
+    const K = ['HP', 'ATK', 'DEF', 'SPC', 'SPE'];
+    const starters = S.map(s => {
+      const on = s.id === st.starter;
+      return {
+        ...s, selected: on,
+        pick: () => this.setState({ starter: s.id }),
+        stats: s.s.map((v, i) => ({ k: K[i], v, bar: 'position: absolute; left: 0; top: 0; bottom: 0; width: ' + Math.round(v / 1.3) + '%; background: ' + (on ? accent : '#1f1c17') + ';' })),
+        cardStyle: 'position: relative; text-align: left; display: flex; flex-direction: column; gap: 16px; padding: 22px 24px; background: ' + (on ? '#fbf8f0' : 'rgba(251,248,240,0.55)') + '; border: ' + (on ? '2px solid #1f1c17' : '1px solid #b9b1a0') + '; box-shadow: ' + (on ? '6px 6px 0 #1f1c17' : 'none') + ';',
+      };
+    });
+    const cur = S.find(s => s.id === st.starter);
+    const P = [
+      ['Pallet Town', 'start'], ['Pewter', 'Brock · Rock'], ['Cerulean', 'Misty · Water'], ['Vermilion', 'Lt. Surge · Electric'],
+      ['Celadon', 'Erika · Grass'], ['Fuchsia', 'Koga · Poison'], ['Saffron', 'Sabrina · Psychic'], ['Cinnabar', 'Blaine · Fire'],
+      ['Viridian', 'Giovanni · Ground'], ['Indigo Plateau', 'Elite Four'],
+    ];
+    const stops = P.map((p, i) => {
+      const done = i <= st.badges, current = i === st.badges;
+      return {
+        city: p[0], who: p[1], current,
+        pick: () => this.setState({ badges: Math.min(i, 8) }),
+        dot: 'width: 26px; height: 26px; border-radius: 50%; box-sizing: border-box; position: relative; z-index: 1; margin-top: 8px; border: 2.5px solid ' + (current ? accent : '#1f1c17') + '; background: ' + (current ? accent : (done ? '#1f1c17' : '#f3eee2')) + '; box-shadow: ' + (current ? '0 0 0 6px ' + accent + '26' : 'none') + ';',
+      };
+    });
+    const nextNames = ['Brock', 'Misty', 'Lt. Surge', 'Erika', 'Koga', 'Sabrina', 'Blaine', 'Giovanni', 'the Elite Four'];
+    const other = st.version === 'red' ? 'Blue' : 'Red';
+    const R = [
+      ['trade', 'I can’t trade', 'Skips Alakazam, Machamp, Golem & Gengar (trade evolutions) and the 11 ' + other + '-only Pokémon.'],
+      ['legend', 'Skip the legendaries', 'No Articuno, Zapdos, Moltres or Mewtwo. Mew is never included.'],
+      ['corner', 'Use Game Corner prizes', 'Adds prize Pokémon and TMs you can buy with coins, like Hyper Beam.'],
+      ['hm', 'Cover the HMs', 'Someone on the team learns Cut, Surf, Strength and Fly, so you don’t need an HM slave.'],
+    ];
+    const rules = R.map(([k, label, note]) => {
+      const on = k === 'trade' ? !st.rules.trade : st.rules[k];
+      return { label, note, on, toggle: () => this.setState({ rules: { ...st.rules, [k]: k === 'trade' ? on : !on } }) };
+    });
+    return {
+      accent,
+      isRed: st.version === 'red', isBlue: st.version === 'blue',
+      pickRed: () => this.setState({ version: 'red' }), pickBlue: () => this.setState({ version: 'blue' }),
+      redStyle: pill(st.version === 'red'), blueStyle: pill(st.version === 'blue'),
+      starters, stops, rules,
+      starterImg: cur.img, starterName: cur.name,
+      stampStyle: 'position: absolute; top: 18px; right: 18px; transform: rotate(8deg); border: 3px double ' + accent + '; color: ' + accent + '; font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 14px; letter-spacing: 3px; padding: 4px 10px;',
+      pinStyle: 'white-space: nowrap; font-family: "Kalam", cursive; font-size: 18px; line-height: 1; color: ' + accent + ';',
+      goalNext: st.goal === 'next', goalAll: st.goal === 'all',
+      pickNext: () => this.setState({ goal: 'next' }), pickAll: () => this.setState({ goal: 'all' }),
+      nextStyle: pill(st.goal === 'next'), allStyle: pill(st.goal === 'all'),
+      nextLabel: 'Beating ' + nextNames[Math.min(st.badges, 8)],
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pocket — Game Boy starter page</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#9bbc0f;font-family:'VT323',ui-monospace,monospace;color:#0f380f}
+a{color:#0f380f}a:hover{color:#306230}
+button{font:inherit;color:inherit;cursor:pointer}
+img{image-rendering:pixelated}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1080px; box-sizing: border-box; padding: 40px 56px 44px; display: flex; flex-direction: column; gap: 26px; background-color: #9bbc0f; background-image: repeating-linear-gradient(0deg, rgba(15,56,15,0.05) 0px, rgba(15,56,15,0.05) 2px, transparent 2px, transparent 4px); color: #0f380f; font-family: 'VT323', ui-monospace, monospace">
+
+  <header style="display: flex; align-items: center; justify-content: space-between">
+    <div style="display: flex; align-items: center; gap: 18px">
+      <svg width="44" height="44" viewBox="0 0 11 11" aria-hidden="true" style="shape-rendering: crispEdges"><path fill="#0f380f" d="M3 0h5v1h2v2h1v5h-1v2H8v1H3v-1H1V8H0V3h1V1h2z"/><path fill="#306230" d="M3 1h5v1h1v1h1v2H1V3h1V2h1z"/><path fill="#9bbc0f" d="M1 6h9v2H9v1H8v1H3V9H2V8H1z"/><path fill="#0f380f" d="M4 4h3v3H4z"/><path fill="#9bbc0f" d="M5 5h1v1H5z"/></svg>
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <div style="font-family: 'Press Start 2P', monospace; font-size: 22px; letter-spacing: 1px">KANTO TEAM LAB</div>
+        <div style="font-size: 24px; color: #306230">ORIGINAL 151 · RED &amp; BLUE · NO GUESSWORK</div>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 14px">
+      <span style="font-family: 'Press Start 2P', monospace; font-size: 12px">VERSION</span>
+      <button type="button" aria-pressed="{{isRed}}" onClick="{{pickRed}}" style="{{redStyle}}">RED</button>
+      <button type="button" aria-pressed="{{isBlue}}" onClick="{{pickBlue}}" style="{{blueStyle}}">BLUE</button>
+    </div>
+  </header>
+
+  <section style="display: grid; grid-template-columns: 460px minmax(0, 1fr); gap: 32px; align-items: stretch">
+    <div style="border: 4px solid #0f380f; box-shadow: inset 0 0 0 4px #9bbc0f, inset 0 0 0 8px #0f380f; background: #9bbc0f; padding: 36px 36px 30px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px">
+      <p style="margin: 0; font-size: 34px; line-height: 1.12">OAK: Hello there! So you want a team that can beat the POKéMON LEAGUE?</p>
+      <p style="margin: 0; font-size: 30px; line-height: 1.15; color: #306230">Tell me which POKéMON you chose, how far you've come, and your house rules. I'll check every move, TM and type matchup for you!</p>
+      <div style="align-self: flex-end; font-size: 28px; animation: blink 1s steps(1) infinite" aria-hidden="true">▼</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px">
+      <div style="font-family: 'Press Start 2P', monospace; font-size: 14px">WHICH POKéMON DID YOU CHOOSE?</div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; flex-grow: 1">
+        <sc-for list="{{starters}}" as="s" hint-placeholder-count="3">
+          <button type="button" aria-pressed="{{s.selected}}" onClick="{{s.pick}}" style="{{s.cardStyle}}">
+            <div style="{{s.barStyle}}">
+              <span>{{s.cursor}}</span>
+              <span>No.{{s.num}}</span>
+            </div>
+            <div style="height: 140px; display: flex; align-items: center; justify-content: center">
+              <img src="{{s.img}}" alt="{{s.name}}" style="{{s.imgStyle}}">
+            </div>
+            <div style="font-family: 'Press Start 2P', monospace; font-size: 15px">{{s.name}}</div>
+            <div style="font-size: 26px; color: #306230">{{s.type}}</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 4px dotted #306230; padding-top: 10px; font-size: 24px">
+              <span>vs BROCK</span>
+              <span style="{{s.verdictStyle}}">{{s.verdict}}</span>
+            </div>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px">
+    <div style="border: 4px solid #0f380f; padding: 22px 24px; display: flex; flex-direction: column; gap: 16px">
+      <div style="font-family: 'Press Start 2P', monospace; font-size: 13px">BADGE CASE</div>
+      <div style="font-size: 26px; color: #306230; line-height: 1">Tap the badges you've already won.</div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px">
+        <sc-for list="{{badges}}" as="b" hint-placeholder-count="8">
+          <button type="button" aria-label="{{b.label}}" aria-pressed="{{b.earned}}" onClick="{{b.pick}}" style="{{b.style}}">
+            <span style="font-family: 'Press Start 2P', monospace; font-size: 14px">{{b.n}}</span>
+            <span style="font-size: 20px">{{b.short}}</span>
+          </button>
+        </sc-for>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 4px dotted #306230; padding-top: 12px">
+        <span style="font-size: 26px">NEXT UP</span>
+        <span style="font-family: 'Press Start 2P', monospace; font-size: 13px">{{next.name}}</span>
+      </div>
+      <div style="font-size: 24px; color: #306230; margin-top: -8px; text-align: right">{{next.detail}}</div>
+    </div>
+
+    <div style="border: 4px solid #0f380f; padding: 22px 24px; display: flex; flex-direction: column; gap: 6px">
+      <div style="font-family: 'Press Start 2P', monospace; font-size: 13px; margin-bottom: 10px">HOUSE RULES</div>
+      <sc-for list="{{rules}}" as="r" hint-placeholder-count="5">
+        <button type="button" aria-pressed="{{r.on}}" onClick="{{r.pick}}" style="display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; align-items: center; gap: 6px; background: transparent; border: 0; padding: 6px 0; min-height: 44px; text-align: left; font-size: 28px">
+          <span style="font-size: 20px">{{r.cursor}}</span>
+          <span>{{r.label}}</span>
+          <span style="{{r.valueStyle}}">{{r.value}}</span>
+        </button>
+      </sc-for>
+      <div style="font-size: 22px; color: #306230; line-height: 1.05; border-top: 4px dotted #306230; padding-top: 10px; margin-top: 6px">{{tradeNote}}</div>
+    </div>
+
+    <div style="border: 4px solid #0f380f; padding: 22px 24px; display: flex; flex-direction: column; gap: 8px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px">
+        <span style="font-family: 'Press Start 2P', monospace; font-size: 13px">MUST-HAVES</span>
+        <span style="font-size: 22px; color: #306230">1/6 LOCKED</span>
+      </div>
+      <div style="display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; align-items: center; gap: 10px; background: #0f380f; color: #9bbc0f; padding: 4px 10px; min-height: 48px">
+        <span style="width: 40px; height: 40px; background: #9bbc0f; display: flex; align-items: center; justify-content: center"><img src="{{starterImg}}" alt="" style="width: 34px; height: 34px; object-fit: contain; image-rendering: pixelated"></span>
+        <span style="font-size: 28px">{{starterName}}</span>
+        <span style="font-family: 'Press Start 2P', monospace; font-size: 10px">STARTER</span>
+      </div>
+      <button type="button" style="display: flex; align-items: center; justify-content: space-between; min-height: 48px; background: transparent; border: 4px dashed #306230; padding: 0 12px; font-size: 28px">
+        <span>+ ADD A FAVORITE</span><span style="font-size: 22px; color: #306230">SEARCH 151</span>
+      </button>
+      <sc-for list="{{emptySlots}}" as="e" hint-placeholder-count="4">
+        <div style="min-height: 40px; display: flex; align-items: center; padding: 0 12px; border-bottom: 4px dotted #8bac0f; font-size: 26px; color: #306230">{{e.label}}</div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 32px; align-items: stretch; flex-grow: 1">
+    <div style="border: 4px solid #0f380f; box-shadow: inset 0 0 0 4px #9bbc0f, inset 0 0 0 8px #0f380f; padding: 26px 34px; display: flex; align-items: center; gap: 28px">
+      <div style="display: flex; gap: 6px; align-items: flex-end; flex-shrink: 0">
+        <img src="/_blob/3eb1ae6a54be3decc5ae5f39283e3372" alt="Geodude" style="width: 78px; height: 66px; object-fit: contain; image-rendering: pixelated">
+        <img src="/_blob/784241175fc3048a5ae19052e4fcfc12" alt="Onix" style="width: 100px; height: 110px; object-fit: contain; image-rendering: pixelated">
+      </div>
+      <p style="margin: 0; font-size: 30px; line-height: 1.12">{{tip}}</p>
+    </div>
+    <button type="button" style="background: #0f380f; color: #9bbc0f; border: 0; box-shadow: 8px 8px 0 #306230; font-family: 'Press Start 2P', monospace; font-size: 22px; line-height: 1.6; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px">
+      <span>▶ BUILD MY</span><span>TEAM</span>
+      <span style="font-family: 'VT323', monospace; font-size: 24px; color: #8bac0f">PRESS START</span>
+    </button>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1080}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { version: 'red', starter: 'charmander', badges: 0, rules: { trade: false, legend: false, corner: true, hm: true, full: false } };
+  }
+  renderVals() {
+    const st = this.state;
+    const D = '#0f380f', M = '#306230', L = '#9bbc0f';
+    const verBtn = on => 'font-family: "Press Start 2P", monospace; font-size: 13px; min-height: 48px; padding: 0 20px; border: 4px solid ' + D + '; background: ' + (on ? D : 'transparent') + '; color: ' + (on ? L : D) + ';';
+
+    const S = [
+      { id: 'bulbasaur', name: 'BULBASAUR', num: '001', type: 'GRASS/POISON', img: '/_blob/b2131b50e2f3c76c4f7f5e8acccca112', w: 102, h: 108, verdict: 'EASY' },
+      { id: 'charmander', name: 'CHARMANDER', num: '004', type: 'FIRE', img: '/_blob/13aa6b721bb14c264d28e7d52a5e5143', w: 105, h: 117, verdict: 'TOUGH' },
+      { id: 'squirtle', name: 'SQUIRTLE', num: '007', type: 'WATER', img: '/_blob/6c4da4d5953a892e7e560eedb99bd4c3', w: 105, h: 96, verdict: 'EASY' },
+    ];
+    const starters = S.map(s => {
+      const on = s.id === st.starter;
+      return {
+        ...s,
+        selected: on,
+        cursor: on ? '▶' : '',
+        pick: () => this.setState({ starter: s.id }),
+        cardStyle: 'display: flex; flex-direction: column; gap: 8px; text-align: left; padding: 0 18px 16px; background: ' + (on ? '#8bac0f' : 'transparent') + '; border: 4px solid ' + D + '; box-shadow: ' + (on ? '8px 8px 0 ' + D : 'none') + '; font-family: "VT323", monospace;',
+        barStyle: 'display: flex; justify-content: space-between; margin: 0 -18px; padding: 8px 14px; font-family: "Press Start 2P", monospace; font-size: 11px; background: ' + (on ? D : 'transparent') + '; color: ' + (on ? L : M) + '; border-bottom: 4px solid ' + D + ';',
+        imgStyle: 'width: ' + s.w + 'px; height: ' + s.h + 'px; image-rendering: pixelated;',
+        verdictStyle: 'font-family: "Press Start 2P", monospace; font-size: 11px; padding: 6px 8px; ' + (s.verdict === 'EASY' ? 'border: 3px solid ' + D + ';' : 'background: ' + D + '; color: ' + L + ';'),
+      };
+    });
+    const cur = S.find(s => s.id === st.starter);
+
+    const G = [
+      ['BOULDER', 'BROCK', 'PEWTER GYM · ROCK'], ['CASCADE', 'MISTY', 'CERULEAN GYM · WATER'],
+      ['THUNDER', 'LT. SURGE', 'VERMILION GYM · ELECTRIC'], ['RAINBOW', 'ERIKA', 'CELADON GYM · GRASS'],
+      ['SOUL', 'KOGA', 'FUCHSIA GYM · POISON'], ['MARSH', 'SABRINA', 'SAFFRON GYM · PSYCHIC'],
+      ['VOLCANO', 'BLAINE', 'CINNABAR GYM · FIRE'], ['EARTH', 'GIOVANNI', 'VIRIDIAN GYM · GROUND'],
+    ];
+    const badges = G.map((g, i) => {
+      const earned = i < st.badges, next = i === st.badges;
+      return {
+        n: i + 1, short: g[0].slice(0, 4), label: g[0] + ' BADGE', earned,
+        pick: () => this.setState({ badges: st.badges === i + 1 ? i : i + 1 }),
+        style: 'display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 64px; padding: 4px; font-family: "VT323", monospace; border: 4px ' + (next ? 'dashed ' : 'solid ') + (earned || next ? D : '#8bac0f') + '; background: ' + (earned ? D : 'transparent') + '; color: ' + (earned ? L : (next ? D : M)) + ';',
+      };
+    });
+    const next = st.badges < 8 ? { name: G[st.badges][1], detail: G[st.badges][2] } : { name: 'ELITE FOUR', detail: 'INDIGO PLATEAU · 5 BATTLES' };
+
+    const R = [
+      ['trade', 'TRADING'], ['legend', 'LEGENDARIES'], ['corner', 'GAME CORNER'], ['hm', 'HM COVERAGE'], ['full', 'FULL EVOS ONLY'],
+    ];
+    const rules = R.map(([k, label], i) => {
+      const on = st.rules[k];
+      return {
+        label, on, cursor: i === 0 ? '▶' : '', value: on ? 'ON' : 'OFF',
+        pick: () => this.setState({ rules: { ...st.rules, [k]: !on } }),
+        valueStyle: 'font-family: "Press Start 2P", monospace; font-size: 12px; padding: 6px 8px; min-width: 44px; text-align: center; ' + (on ? 'background: ' + D + '; color: ' + L + ';' : 'border: 3px solid ' + D + ';'),
+      };
+    });
+    const other = st.version === 'red' ? 'BLUE' : 'RED';
+    const tradeNote = st.rules.trade
+      ? 'TRADING ON: ALAKAZAM, MACHAMP, GOLEM, GENGAR and ' + other + '-ONLY POKéMON are back in the pool.'
+      : 'NO TRADES: skips ALAKAZAM, MACHAMP, GOLEM, GENGAR and the 11 ' + other + '-ONLY POKéMON.';
+
+    let tip;
+    if (st.badges > 0) tip = 'OAK: Next up is ' + next.name + '. I\'ll plan your levels, moves and TMs for that fight, then look ahead to the LEAGUE.';
+    else if (st.starter === 'bulbasaur') tip = 'OAK: BULBASAUR learns VINE WHIP at L13. That\'s 4× damage on GEODUDE and ONIX. BROCK won\'t know what hit him!';
+    else if (st.starter === 'squirtle') tip = 'OAK: SQUIRTLE learns BUBBLE at L8. That\'s 4× damage on both of BROCK\'s POKéMON. An easy BOULDERBADGE!';
+    else tip = st.version === 'red'
+      ? 'OAK: Hmm! BROCK\'s ROCK types shrug off EMBER. But ONIX has 160 DEFENSE and only 30 SPECIAL… BUTTERFREE\'s CONFUSION (L12) will crush it. CATERPIE is rare in RED: 5% in VIRIDIAN FOREST.'
+      : 'OAK: Hmm! BROCK\'s ROCK types shrug off EMBER. But ONIX has 160 DEFENSE and only 30 SPECIAL… BUTTERFREE\'s CONFUSION (L12) will crush it. Lucky you: CATERPIE is everywhere in BLUE\'s VIRIDIAN FOREST.';
+
+    return {
+      isRed: st.version === 'red', isBlue: st.version === 'blue',
+      pickRed: () => this.setState({ version: 'red' }), pickBlue: () => this.setState({ version: 'blue' }),
+      redStyle: verBtn(st.version === 'red'), blueStyle: verBtn(st.version === 'blue'),
+      starters, badges, next, rules, tradeNote, tip,
+      starterImg: cur.img, starterName: cur.name,
+      emptySlots: [{ label: '— OPEN —' }, { label: '— OPEN —' }, { label: '— OPEN —' }, { label: '— OPEN —' }],
+    };
+  }
+}
+</script>
+</body>
+</html>

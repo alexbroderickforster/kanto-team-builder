@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tactics Console — starter page</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0d1015;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#e8e6e1}
+a{color:#e8e6e1}a:hover{color:#ffffff}
+button{font:inherit;color:inherit;cursor:pointer}
+img{image-rendering:pixelated}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1100px; box-sizing: border-box; display: grid; grid-template-columns: 420px minmax(0, 1fr); background: #0d1015; color: #e8e6e1; font-family: 'IBM Plex Sans', system-ui, sans-serif">
+
+  <aside style="background: #12161c; border-right: 1px solid #262d38; padding: 32px 32px 28px; display: flex; flex-direction: column; gap: 26px">
+    <div style="display: flex; align-items: center; gap: 12px">
+      <span style="width: 34px; height: 34px; border-radius: 50%; border: 3px solid #e8e6e1; box-sizing: border-box; position: relative; background: linear-gradient(180deg, {{accent}} 0 44%, #e8e6e1 44% 56%, #12161c 56% 100%)" aria-hidden="true"></span>
+      <div style="display: flex; flex-direction: column">
+        <span style="font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 1px">TEAM LAB/151</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9aa3ad">Party optimizer · Gen I</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 1.5px; color: #9aa3ad">VERSION</span>
+      <div role="group" aria-label="Version" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border: 1px solid #262d38; border-radius: 10px; overflow: hidden">
+        <button type="button" aria-pressed="{{isRed}}" onClick="{{pickRed}}" style="{{redStyle}}">RED</button>
+        <button type="button" aria-pressed="{{isBlue}}" onClick="{{pickBlue}}" style="{{blueStyle}}">BLUE</button>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 1.5px; color: #9aa3ad">STARTER</span>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+        <sc-for list="{{starters}}" as="s" hint-placeholder-count="3">
+          <button type="button" aria-pressed="{{s.selected}}" onClick="{{s.pick}}" style="{{s.style}}">
+            <img src="{{s.img}}" alt="" style="width: 64px; height: 64px; image-rendering: pixelated">
+            <span style="font-size: 13px; font-weight: 500">{{s.name}}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 1.5px; color: #9aa3ad">BADGES WON</span>
+        <span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 18px">{{badgeCount}}<span style="color: #9aa3ad"> / 8</span></span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 5px">
+        <sc-for list="{{steps}}" as="b" hint-placeholder-count="9">
+          <button type="button" aria-label="{{b.label}}" onClick="{{b.pick}}" style="{{b.style}}">{{b.n}}</button>
+        </sc-for>
+      </div>
+      <span style="font-size: 14px; color: #9aa3ad">Next: <span style="color: #e8e6e1; font-weight: 500">{{nextName}}</span></span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 1.5px; color: #9aa3ad">OPTIMIZE FOR</span>
+      <div role="radiogroup" aria-label="Optimize for" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <button type="button" role="radio" aria-checked="{{goalNext}}" onClick="{{pickNext}}" style="{{nextStyle}}">Next gym</button>
+        <button type="button" role="radio" aria-checked="{{goalAll}}" onClick="{{pickAll}}" style="{{allStyle}}">Elite Four</button>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 1.5px; color: #9aa3ad; margin-bottom: 6px">CONSTRAINTS</span>
+      <sc-for list="{{rules}}" as="r" hint-placeholder-count="4">
+        <button type="button" role="switch" aria-checked="{{r.on}}" onClick="{{r.pick}}" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; background: transparent; border: 0; border-bottom: 1px solid #1e242d; padding: 0; text-align: left">
+          <span style="display: flex; flex-direction: column; gap: 1px"><span style="font-size: 15px">{{r.label}}</span><span style="font-size: 12px; color: #9aa3ad">{{r.hint}}</span></span>
+          <span style="{{r.track}}"><span style="{{r.knob}}"></span></span>
+        </button>
+      </sc-for>
+    </div>
+
+    <button type="button" style="margin-top: auto; min-height: 56px; border: 0; border-radius: 10px; background: {{accent}}; color: #0d1015; font-family: 'Chakra Petch', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 1.5px">RE-OPTIMIZE</button>
+  </aside>
+
+  <main style="padding: 32px 40px 32px; display: flex; flex-direction: column; gap: 22px; min-width: 0">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 1.5px; color: {{accentText}}">{{summary}}</span>
+        <h1 style="margin: 0; font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 40px; line-height: 1.05">Your best six for the League</h1>
+      </div>
+      <div style="display: flex; gap: 10px">
+        <button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 8px; border: 1px solid #333b47; background: #151a21; font-size: 14px">Lock all</button>
+        <button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 8px; border: 1px solid #333b47; background: #151a21; font-size: 14px">Show alternates</button>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+      <sc-for list="{{team}}" as="m" hint-placeholder-count="6">
+        <article style="background: #151a21; border: 1px solid #262d38; border-radius: 12px; padding: 14px 16px 14px; display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; gap: 12px; align-items: center">
+            <div style="width: 72px; height: 72px; border-radius: 10px; background: #0d1015; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><img src="{{m.img}}" alt="" style="width: 64px; height: 64px; image-rendering: pixelated"></div>
+            <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+              <div style="display: flex; align-items: center; gap: 8px"><span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 19px">{{m.name}}</span><sc-if value="{{m.locked}}" hint-placeholder-val="{{false}}"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 1px; border: 1px solid #4a5361; border-radius: 4px; padding: 2px 5px; color: #c3c9d1">LOCKED</span></sc-if></div>
+              <div style="display: flex; gap: 10px">
+                <sc-for list="{{m.types}}" as="t" hint-placeholder-count="2">
+                  <span style="display: flex; align-items: center; gap: 5px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.5px"><span style="{{t.dot}}"></span>{{t.name}}</span>
+                </sc-for>
+              </div>
+              <span style="font-size: 12px; color: #9aa3ad; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{m.how}}</span>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px">
+            <sc-for list="{{m.moves}}" as="v" hint-placeholder-count="4">
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 6px; background: #0f1318; border-radius: 6px; padding: 6px 8px; font-size: 13px">
+                <span style="display: flex; align-items: center; gap: 6px; min-width: 0"><span style="{{v.dot}}"></span><span style="white-space: nowrap">{{v.name}}</span></span>
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #9aa3ad">{{v.src}}</span>
+              </div>
+            </sc-for>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+
+    <section style="background: #151a21; border: 1px solid #262d38; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline">
+        <span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.5px">TYPE COVERAGE · GEN I CHART</span>
+        <span style="font-size: 13px; color: #9aa3ad">Super-effective on 14 of 15 types. Nothing hits Ghost for 2× in Gen I except Ghost moves.</span>
+      </div>
+      <div style="display: grid; grid-template-columns: 110px repeat(15, minmax(0, 1fr)); gap: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; align-items: center">
+        <span></span>
+        <sc-for list="{{typeHeads}}" as="h" hint-placeholder-count="15"><span style="text-align: center; color: #c3c9d1">{{h}}</span></sc-for>
+        <span style="color: #9aa3ad">You hit 2×</span>
+        <sc-for list="{{offCells}}" as="c" hint-placeholder-count="15"><span style="{{c.style}}">{{c.v}}</span></sc-for>
+        <span style="color: #9aa3ad">Weak (of 6)</span>
+        <sc-for list="{{weakCells}}" as="c" hint-placeholder-count="15"><span style="{{c.style}}">{{c.v}}</span></sc-for>
+        <span style="color: #9aa3ad">Resist (of 6)</span>
+        <sc-for list="{{resCells}}" as="c" hint-placeholder-count="15"><span style="{{c.style}}">{{c.v}}</span></sc-for>
+      </div>
+    </section>
+
+    <div style="display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 14px; flex-grow: 1">
+      <section style="background: #151a21; border: 1px solid #262d38; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline">
+          <span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.5px">BEFORE BROCK</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9aa3ad">PEWTER GYM · GEODUDE L12 · ONIX L14</span>
+        </div>
+        <div style="display: flex; gap: 14px; align-items: center">
+          <div style="display: flex; flex-shrink: 0"><img src="/_blob/3e2d8e274ee61a6f71592a2f7ad0d253" alt="Geodude" style="width: 64px; height: 64px"><img src="/_blob/b04d18c06f3cbaae12ed3a871f2c616b" alt="Onix" style="width: 64px; height: 64px"></div>
+          <p style="margin: 0; font-size: 15px; line-height: 1.45; color: #d6d3cc">{{brockTip}}</p>
+        </div>
+      </section>
+      <section style="background: #151a21; border: 1px solid #262d38; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline">
+          <span style="font-family: 'Chakra Petch', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.5px">TM LEDGER</span>
+          <span style="font-size: 12px; color: #9aa3ad">Gen I TMs are single-use</span>
+        </div>
+        <sc-for list="{{ledger}}" as="l" hint-placeholder-count="4">
+          <div style="display: grid; grid-template-columns: 54px minmax(0, 1fr) auto; gap: 8px; font-size: 13px; align-items: center; min-height: 22px">
+            <span style="font-family: 'IBM Plex Mono', monospace; color: #9aa3ad">{{l.tm}}</span>
+            <span>{{l.move}}</span>
+            <span style="color: #c3c9d1">→ {{l.who}}</span>
+          </div>
+        </sc-for>
+      </section>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { version: 'red', starter: 'charmander', badges: 0, goal: 'all', rules: { trade: false, legend: true, corner: true, hm: true } };
+  }
+  renderVals() {
+    const st = this.state;
+    const isRed = st.version === 'red';
+    const accent = isRed ? '#f0584a' : '#4f8dff';
+    const accentText = isRed ? '#ff8a7e' : '#8db6ff';
+    const TC = { Normal: '#a8a77a', Fire: '#ee8130', Water: '#6390f0', Electric: '#f7d02c', Grass: '#7ac74c', Ice: '#96d9d6', Fighting: '#d8443d', Poison: '#b85bb6', Ground: '#e2bf65', Flying: '#a98ff3', Psychic: '#f95587', Bug: '#a6b91a', Rock: '#b6a136', Ghost: '#8a70b0', Dragon: '#8a5cff' };
+    const dot = t => 'width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; display: inline-block; background: ' + TC[t] + ';';
+    const verBtn = on => 'min-height: 52px; border: 0; font-family: "Chakra Petch", sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 2px; background: ' + (on ? accent : 'transparent') + '; color: ' + (on ? '#0d1015' : '#9aa3ad') + ';';
+    const seg = on => 'min-height: 44px; border-radius: 8px; font-size: 14px; font-weight: 500; border: 1px solid ' + (on ? accent : '#333b47') + '; background: ' + (on ? 'rgba(255,255,255,0.04)' : 'transparent') + '; color: ' + (on ? '#ffffff' : '#9aa3ad') + ';';
+
+    const SV = {
+      bulbasaur: { name: 'Venusaur', img: '/_blob/ab0f9632499b9db33f0530c5109d6068', types: ['Grass', 'Poison'], how: 'Starter · Bulbasaur → L16 → L32', moves: [['Razor Leaf', 'Grass', 'L30'], ['Sleep Powder', 'Grass', 'L55'], ['Swords Dance', 'Normal', 'TM03'], ['Body Slam', 'Normal', 'TM08']] },
+      charmander: { name: 'Charizard', img: '/_blob/6928d746130d49e4f1405468606da1fa', types: ['Fire', 'Flying'], how: 'Starter · Charmander → L16 → L36', moves: [['Flamethrower', 'Fire', 'L46'], ['Slash', 'Normal', 'L36'], ['Dig', 'Ground', 'TM28'], ['Swords Dance', 'Normal', 'TM03']] },
+      squirtle: { name: 'Blastoise', img: '/_blob/5eef455537c6d2ea02799ee1c53ffd3f', types: ['Water'], how: 'Starter · Squirtle → L16 → L36', moves: [['Surf', 'Water', 'HM03'], ['Hydro Pump', 'Water', 'L52'], ['Ice Beam', 'Ice', 'TM13'], ['Skull Bash', 'Normal', 'L42']] },
+    };
+    const S = [
+      { id: 'bulbasaur', name: 'Bulbasaur', img: '/_blob/93aee1d54d12bd3d7c519ff4da165d3f' },
+      { id: 'charmander', name: 'Charmander', img: '/_blob/0e883bce5bc6dbbadaceb214d2b7f49b' },
+      { id: 'squirtle', name: 'Squirtle', img: '/_blob/69c9636c01953afb0393e391d5172518' },
+    ];
+    const starters = S.map(s => {
+      const on = s.id === st.starter;
+      return { ...s, selected: on, pick: () => this.setState({ starter: s.id }),
+        style: 'display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 4px 10px; border-radius: 10px; border: 1px solid ' + (on ? accent : '#262d38') + '; background: ' + (on ? 'rgba(255,255,255,0.05)' : 'transparent') + '; color: ' + (on ? '#ffffff' : '#9aa3ad') + ';' };
+    });
+
+    const names = ['Brock', 'Misty', 'Lt. Surge', 'Erika', 'Koga', 'Sabrina', 'Blaine', 'Giovanni', 'Elite Four'];
+    const where = ['Pewter · Rock', 'Cerulean · Water', 'Vermilion · Electric', 'Celadon · Grass', 'Fuchsia · Poison', 'Saffron · Psychic', 'Cinnabar · Fire', 'Viridian · Ground', 'Indigo Plateau'];
+    const steps = Array.from({ length: 9 }, (_, i) => {
+      const done = i < st.badges, cur = i === st.badges;
+      return { n: i < 8 ? i + 1 : 'E4', label: i < 8 ? names[i] + ' beaten' : 'At the Elite Four',
+        pick: () => this.setState({ badges: st.badges === i + 1 ? i : Math.min(i + 1, 8) }),
+        style: 'min-height: 40px; border-radius: 6px; font-family: "IBM Plex Mono", monospace; font-size: 12px; border: 1px ' + (cur ? 'dashed ' + accent : 'solid ' + (done ? accent : '#333b47')) + '; background: ' + (done ? accent : 'transparent') + '; color: ' + (done ? '#0d1015' : (cur ? '#ffffff' : '#9aa3ad')) + ';' };
+    });
+
+    const other = isRed ? 'Blue' : 'Red';
+    const R = [
+      ['trade', 'No trading', 'Drops 4 trade evos + 11 ' + other + '-only', true],
+      ['legend', 'No legendaries', 'Birds and Mewtwo stay out', false],
+      ['corner', 'Game Corner allowed', 'Prize Pokémon, TM15, TM50', false],
+      ['hm', 'Cover HMs in-party', 'Cut · Fly · Surf · Strength · Flash', false],
+    ];
+    const rules = R.map(([k, label, hint, inverted]) => {
+      const on = inverted ? !st.rules[k] : st.rules[k];
+      return { label, hint, on, pick: () => this.setState({ rules: { ...st.rules, [k]: !st.rules[k] } }),
+        track: 'width: 42px; height: 24px; border-radius: 999px; flex-shrink: 0; position: relative; display: block; background: ' + (on ? accent : '#333b47') + ';',
+        knob: 'position: absolute; top: 3px; left: ' + (on ? '21px' : '3px') + '; width: 18px; height: 18px; border-radius: 50%; background: #0d1015; display: block;' };
+    });
+
+    const mv = ([name, type, src]) => ({ name, src, dot: dot(type) });
+    const tp = ts => ts.map(t => ({ name: t.toUpperCase(), dot: dot(t) }));
+    const lead = SV[st.starter];
+    const team = [
+      { ...lead, locked: true, types: tp(lead.types), moves: lead.moves.map(mv) },
+      { name: 'Nidoking', img: '/_blob/1582445e4dac38b9a3961013baa0bf2c', types: tp(['Poison', 'Ground']), how: 'Route 22 Nidoran♂ → L16 → Moon Stone', moves: [['Earthquake', 'Ground', 'TM26'], ['Blizzard', 'Ice', 'TM14'], ['Rock Slide', 'Rock', 'TM48'], ['Thunder', 'Electric', 'TM25']].map(mv) },
+      { name: 'Lapras', img: '/_blob/cd7b7b41e547a48a3dbbbfecfbd25074', types: tp(['Water', 'Ice']), how: 'Gift · Silph Co. 7F', moves: [['Surf', 'Water', 'HM03'], ['Ice Beam', 'Ice', 'L38'], ['Psychic', 'Psychic', 'TM29'], ['Body Slam', 'Normal', 'L25']].map(mv) },
+      { name: 'Jolteon', img: '/_blob/68f93d3ac3bca4ab830eceb7f8ba8b86', types: tp(['Electric']), how: 'Gift Eevee · Celadon Mansion + Thunder Stone', moves: [['Thunderbolt', 'Electric', 'TM24'], ['Thunder Wave', 'Electric', 'L40'], ['Double Kick', 'Fighting', 'L42'], ['Pin Missile', 'Bug', 'L48']].map(mv) },
+      { name: 'Snorlax', img: '/_blob/17fb9d2c3254ba48d34e51ee206ebd13', types: tp(['Normal']), how: 'Route 12 or 16 · needs Poké Flute', moves: [['Body Slam', 'Normal', 'L35'], ['Hyper Beam', 'Normal', 'TM15'], ['Rest', 'Psychic', 'L1'], ['Strength', 'Normal', 'HM04']].map(mv) },
+      { name: 'Pidgeot', img: '/_blob/25d18e1fd1fdbbba6c585406fdb33f27', types: tp(['Normal', 'Flying']), how: 'Route 1 Pidgey → L18 → L36', moves: [['Fly', 'Flying', 'HM02'], ['Double-Edge', 'Normal', 'TM10'], ['Agility', 'Psychic', 'L44'], ['Sand-Attack', 'Normal', 'L5']].map(mv) },
+    ];
+
+    const heads = ['NOR', 'FIR', 'WAT', 'ELE', 'GRA', 'ICE', 'FIG', 'POI', 'GRO', 'FLY', 'PSY', 'BUG', 'ROC', 'GHO', 'DRA'];
+    const COV = {
+      charmander: { off: [2,2,2,2,2,2,2,2,2,2,2,2,2,1,2], weak: [0,0,2,3,1,3,2,0,2,0,1,1,3,0,0], res: [0,1,1,2,2,1,2,1,2,1,0,2,1,2,0] },
+      bulbasaur: { off: [2,2,2,2,2,2,2,2,2,2,2,2,2,1,2], weak: [0,1,1,2,1,3,2,0,2,1,2,2,2,0,0], res: [0,0,2,3,2,1,2,1,1,1,0,1,1,2,0] },
+      squirtle: { off: [2,2,2,2,2,2,2,2,2,2,2,2,2,1,2], weak: [0,0,1,3,2,2,2,0,2,0,1,1,2,0,0], res: [0,1,2,2,1,2,1,1,1,1,0,1,1,2,0] },
+    }[st.starter];
+    const cell = 'height: 26px; border-radius: 4px; display: flex; align-items: center; justify-content: center; ';
+    const offCells = COV.off.map(v => ({ v: v === 2 ? '2×' : '1×', style: cell + (v === 2 ? 'background: ' + accent + '; color: #0d1015; font-weight: 500;' : 'background: #0f1318; color: #9aa3ad; border: 1px dashed #4a5361;') }));
+    const weakCells = COV.weak.map(v => ({ v: v || '·', style: cell + (v >= 3 ? 'background: #f2b134; color: #0d1015; font-weight: 500;' : v === 2 ? 'background: #5c4a1f; color: #f5e6c4;' : 'background: #0f1318; color: #9aa3ad;') }));
+    const resCells = COV.res.map(v => ({ v: v || '·', style: cell + (v >= 2 ? 'background: #1f3b52; color: #cfe6ff;' : 'background: #0f1318; color: #9aa3ad;') }));
+
+    const ledger = [
+      { tm: 'TM26', move: 'Earthquake', who: 'Nidoking' },
+      { tm: 'TM24', move: 'Thunderbolt', who: 'Jolteon' },
+      { tm: 'TM29', move: 'Psychic', who: 'Lapras' },
+      { tm: 'TM14', move: 'Blizzard', who: 'Nidoking' },
+      { tm: 'TM25', move: 'Thunder', who: 'Nidoking' },
+    ];
+
+    let brockTip;
+    if (st.starter === 'bulbasaur') brockTip = 'Vine Whip (L13) is 4× on both. Grind Bulbasaur to 13 on Route 1 and walk in.';
+    else if (st.starter === 'squirtle') brockTip = 'Bubble (L8) is 4× on both. No detour needed.';
+    else brockTip = isRed
+      ? 'Ember is resisted. Onix has 160 Defense but only 30 Special: Butterfree’s Confusion (L12) shreds it. Caterpie is only 5% in Red’s Viridian Forest, so budget time to find one.'
+      : 'Ember is resisted. Onix has 160 Defense but only 30 Special: Butterfree’s Confusion (L12) shreds it. Caterpie is common in Blue’s Viridian Forest.';
+
+    return {
+      accent, accentText,
+      isRed, isBlue: !isRed,
+      pickRed: () => this.setState({ version: 'red' }), pickBlue: () => this.setState({ version: 'blue' }),
+      redStyle: verBtn(isRed), blueStyle: verBtn(!isRed),
+      starters, steps, rules, team,
+      badgeCount: st.badges, nextName: names[Math.min(st.badges, 8)] + ' · ' + where[Math.min(st.badges, 8)],
+      goalNext: st.goal === 'next', goalAll: st.goal === 'all',
+      pickNext: () => this.setState({ goal: 'next' }), pickAll: () => this.setState({ goal: 'all' }),
+      nextStyle: seg(st.goal === 'next'), allStyle: seg(st.goal === 'all'),
+      summary: (isRed ? 'POKéMON RED' : 'POKéMON BLUE') + ' · ' + (st.rules.trade ? 'TRADING OK' : 'NO TRADES') + ' · ' + st.badges + ' BADGES',
+      typeHeads: heads, offCells, weakCells, resCells, ledger, brockTip,
+    };
+  }
+}
+</script>
+</body>
+</html>

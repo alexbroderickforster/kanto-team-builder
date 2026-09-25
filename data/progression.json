@@ -1,0 +1,5833 @@
+{
+  "meta": {
+    "game": "Pokemon Red and Blue (English, Game Boy, Gen I; not Yellow)",
+    "idConventions": "Species and move ids are lowercase alphanumeric Showdown ids (mrmime, farfetchd, nidoranf, nidoranm, doubleedge, softboiled). Location keys are PokeAPI location slugs from /region/kanto.",
+    "stageSemantics": "earliestStage = the first stage at which the thing can actually be reached, given the gym order used here (Brock, Misty, Surge, Erika, Koga, Sabrina, Blaine, Giovanni), badge requirements for field HMs, and key items picked up as soon as they're reachable. typicalStage = when a standard walkthrough gets there. They differ because Red/Blue is quite open after Cut: with the Cascade Badge you can reach Celadon, the Rocket Hideout, the Pokemon Tower, Fuchsia and the Safari Zone before beating Lt. Surge. For a 'what do I have right now' slider, typicalStage is usually the more intuitive filter.",
+    "requirementIds": [
+      "cut",
+      "fly",
+      "surf",
+      "strength",
+      "flash",
+      "old-rod",
+      "good-rod",
+      "super-rod",
+      "poke-flute",
+      "silph-scope",
+      "bike",
+      "ss-ticket",
+      "drink"
+    ],
+    "primaryTruthSource": "pret/pokered disassembly (github.com/pret/pokered), cross-checked against Bulbapedia wikitext (via the MediaWiki API) and PokeAPI.",
+    "generatedFor": "izzy-demo team builder"
+  },
+  "stages": [
+    {
+      "id": "start",
+      "order": 0,
+      "label": "Start: Pallet Town & Route 1",
+      "badgesHeld": 0,
+      "hmsUsable": [],
+      "unlocks": [
+        "starter"
+      ],
+      "summary": "Choose a starter in Oak's Lab, fight the rival once, walk Route 1 to Viridian and pick up Oak's Parcel. Route 1 and Route 22 grass can be walked, but you can't buy Poke Balls until the parcel is delivered.",
+      "notes": "The Viridian City old man blocks the road north until Oak's Parcel is delivered."
+    },
+    {
+      "id": "pre-brock",
+      "order": 1,
+      "label": "Pre-Brock: Viridian Forest & Pewter",
+      "badgesHeld": 0,
+      "hmsUsable": [],
+      "unlocks": [
+        "pokedex",
+        "poke-balls"
+      ],
+      "summary": "Pokedex received and Poke Balls on sale in Viridian. Route 2 (west side), Viridian Forest, Pewter City, optional rival battle on Route 22. Ends by beating Brock (Boulder Badge).",
+      "notes": "A boy in Pewter blocks the east exit to Route 3 until Brock is beaten."
+    },
+    {
+      "id": "pre-misty",
+      "order": 2,
+      "label": "Pre-Misty: Mt. Moon & Cerulean",
+      "badgesHeld": 1,
+      "hmsUsable": [],
+      "unlocks": [
+        "boulder-badge",
+        "ss-ticket",
+        "dome-or-helix-fossil"
+      ],
+      "summary": "Route 3, Mt. Moon (fossil choice), Route 4, Cerulean City (rival), Nugget Bridge (Routes 24/25) and Bill's S.S. Ticket. Ends by beating Misty (Cascade Badge).",
+      "notes": "The Boulder Badge enables Flash, but HM05 is behind a Cut tree on Route 2, so Flash can't be used yet. After meeting Bill you can already walk south to Route 5 / Vermilion through the burglarized house, so the next stage's areas are technically reachable here (see earliestStage vs typicalStage)."
+    },
+    {
+      "id": "pre-surge",
+      "order": 3,
+      "label": "Pre-Surge: Vermilion & S.S. Anne",
+      "badgesHeld": 2,
+      "hmsUsable": [
+        "cut",
+        "flash"
+      ],
+      "unlocks": [
+        "cascade-badge",
+        "cut",
+        "old-rod",
+        "bike",
+        "flash",
+        "old-amber"
+      ],
+      "summary": "Routes 5/6 and the Underground Path, Vermilion City (Old Rod, Bike Voucher), S.S. Anne (rival, HM01 Cut), Route 11 and Diglett's Cave, Route 2 east side (HM05 Flash for 10 owned), Pewter Museum Old Amber (needs Cut). Ends by beating Lt. Surge (Thunder Badge).",
+      "notes": "Cut becomes usable here: HM01 from the S.S. Anne captain plus the Cascade Badge. Surge's Gym is behind a Cut tree. With Cut you could already travel Route 9 to Rock Tunnel, Lavender and Celadon and beyond, so strict earliestStage values put many mid-game areas here."
+    },
+    {
+      "id": "pre-erika",
+      "order": 4,
+      "label": "Pre-Erika: Rock Tunnel, Lavender & Celadon",
+      "badgesHeld": 3,
+      "hmsUsable": [
+        "cut",
+        "flash",
+        "fly"
+      ],
+      "unlocks": [
+        "thunder-badge",
+        "coin-case",
+        "drinks",
+        "fly"
+      ],
+      "summary": "Route 9, Rock Tunnel, Route 10, Lavender Town, Routes 8/7, Celadon City (Eevee, Game Corner prizes, Dept. Store TMs, rooftop drinks). Ends by beating Erika (Rainbow Badge).",
+      "notes": "The Thunder Badge enables Fly; HM02 Fly is in the Route 16 house (reached with Cut from Celadon). A drink from the Celadon rooftop vending machines gets you past the Saffron gate guards."
+    },
+    {
+      "id": "pre-koga",
+      "order": 5,
+      "label": "Pre-Koga: Rocket Hideout, Pokemon Tower & Fuchsia",
+      "badgesHeld": 4,
+      "hmsUsable": [
+        "cut",
+        "flash",
+        "fly",
+        "strength"
+      ],
+      "unlocks": [
+        "rainbow-badge",
+        "silph-scope",
+        "poke-flute",
+        "good-rod",
+        "super-rod",
+        "hm-surf",
+        "strength"
+      ],
+      "summary": "Rocket Hideout (Giovanni #1, Silph Scope), Pokemon Tower (rival, Mr. Fuji, Poke Flute), wake a Snorlax (Route 12 or 16), Routes 12-18 / Cycling Road, Fuchsia City (Good Rod), Safari Zone (HM03 Surf, Gold Teeth for HM04 Strength), Super Rod on Route 12. Ends by beating Koga (Soul Badge).",
+      "notes": "The Rainbow Badge enables Strength. HM03 Surf is found here but can't be used on the field until the Soul Badge. Gym order is flexible from here on: Bulbapedia's walkthrough does Saffron/Sabrina before Fuchsia/Koga; this file uses Erika -> Koga -> Sabrina -> Blaine -> Giovanni."
+    },
+    {
+      "id": "pre-sabrina",
+      "order": 6,
+      "label": "Pre-Sabrina: Saffron & Silph Co.",
+      "badgesHeld": 5,
+      "hmsUsable": [
+        "cut",
+        "flash",
+        "fly",
+        "strength",
+        "surf"
+      ],
+      "unlocks": [
+        "soul-badge",
+        "surf",
+        "card-key",
+        "lapras",
+        "fighting-dojo-gift"
+      ],
+      "summary": "Surf is usable. Saffron City: Fighting Dojo (Hitmonlee or Hitmonchan), Silph Co. (rival, Lapras, Giovanni #2, Master Ball). Ends by beating Sabrina (Marsh Badge).",
+      "notes": "Surf opens the Power Plant, Seafoam Islands, Routes 19-21 and Cinnabar, so Blaine can come before Sabrina. Saffron can be entered as early as pre-erika with a drink, and Silph Co. once Mr. Fuji is rescued."
+    },
+    {
+      "id": "pre-blaine",
+      "order": 7,
+      "label": "Pre-Blaine: Seafoam & Cinnabar",
+      "badgesHeld": 6,
+      "hmsUsable": [
+        "cut",
+        "flash",
+        "fly",
+        "strength",
+        "surf"
+      ],
+      "unlocks": [
+        "marsh-badge",
+        "secret-key",
+        "fossil-revival"
+      ],
+      "summary": "Routes 19/20 by sea, Seafoam Islands (Articuno), Cinnabar Island (Pokemon Lab fossil revival and trades, Pokemon Mansion and the Secret Key), Route 21. Ends by beating Blaine (Volcano Badge).",
+      "notes": "The Soul Badge must come before the Volcano Badge because Cinnabar can only be reached by Surf."
+    },
+    {
+      "id": "pre-giovanni",
+      "order": 8,
+      "label": "Pre-Giovanni: Viridian Gym",
+      "badgesHeld": 7,
+      "hmsUsable": [
+        "cut",
+        "flash",
+        "fly",
+        "strength",
+        "surf"
+      ],
+      "unlocks": [
+        "volcano-badge"
+      ],
+      "summary": "Viridian Gym opens after 7 badges. The Power Plant (Zapdos) is usually cleaned up here. Ends by beating Giovanni (Earth Badge).",
+      "notes": "The Power Plant has been reachable since Surf (pre-sabrina)."
+    },
+    {
+      "id": "elite-four",
+      "order": 9,
+      "label": "Elite Four: Route 22/23, Victory Road & Indigo Plateau",
+      "badgesHeld": 8,
+      "hmsUsable": [
+        "cut",
+        "flash",
+        "fly",
+        "strength",
+        "surf"
+      ],
+      "unlocks": [
+        "earth-badge"
+      ],
+      "summary": "Rival on Route 22, Route 23 badge gates, Victory Road (Moltres; Strength puzzles), then Lorelei, Bruno, Agatha, Lance and the Champion.",
+      "notes": "Route 23 checks each badge in order; Surf and Strength are needed to reach Indigo Plateau."
+    },
+    {
+      "id": "post-game",
+      "order": 10,
+      "label": "Post-game: Cerulean Cave",
+      "badgesHeld": 8,
+      "hmsUsable": [
+        "cut",
+        "flash",
+        "fly",
+        "strength",
+        "surf"
+      ],
+      "unlocks": [
+        "champion"
+      ],
+      "summary": "After you become Champion, the guard leaves Cerulean Cave (entered by Surf). Mewtwo is at the bottom.",
+      "notes": "Anything missable, like the second fossil or the other Fighting Dojo Pokemon, is gone for good."
+    }
+  ],
+  "locations": {
+    "pallet-town": {
+      "name": "Pallet Town",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-surge",
+      "requires": [],
+      "encounterMethods": {
+        "old-rod": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-surge",
+          "requires": [
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "Fishing only, from the shore south of town (the start of Route 21). No surf table."
+    },
+    "viridian-city": {
+      "name": "Viridian City",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-surge",
+      "requires": [],
+      "encounterMethods": {
+        "old-rod": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-surge",
+          "requires": [
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "Fishing only, in the city pond."
+    },
+    "pewter-city": {
+      "name": "Pewter City",
+      "hasWildEncounters": false,
+      "earliestStage": "pre-brock",
+      "typicalStage": "pre-brock",
+      "requires": [],
+      "encounterMethods": {},
+      "notes": "No wild Pokemon. Brock's Gym; the Pewter Museum back room (needs Cut) gives the Old Amber."
+    },
+    "cerulean-city": {
+      "name": "Cerulean City",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-surge",
+      "requires": [],
+      "encounterMethods": {
+        "old-rod": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-surge",
+          "requires": [
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "Fishing only (the Super Rod also works in the Cerulean Gym pool). Also has the Jynx trade and the TM28 Dig Rocket."
+    },
+    "vermilion-city": {
+      "name": "Vermilion City",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-surge",
+      "requires": [],
+      "encounterMethods": {
+        "old-rod": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-surge",
+          "requires": [
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "Fishing only, in the harbor and at the S.S. Anne dock. Vermilion is technically reachable pre-Misty (via Route 5 after meeting Bill), but the usual route arrives after the Cascade Badge."
+    },
+    "celadon-city": {
+      "name": "Celadon City",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "requires": [
+        "cut"
+      ],
+      "encounterMethods": {
+        "old-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "requires": [
+            "cut",
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "Fishing only, in the city pond. Eevee gift, Game Corner prize Pokemon and TMs, Dept. Store TMs, Rocket Hideout."
+    },
+    "fuchsia-city": {
+      "name": "Fuchsia City",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-koga",
+      "requires": [
+        "cut",
+        "poke-flute"
+      ],
+      "encounterMethods": {
+        "old-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "Fishing only. Getting to Fuchsia takes the Poke Flute (Snorlax on Route 12 or 16), or the Bicycle via Cycling Road, which also needs the Route 16 Snorlax woken."
+    },
+    "cinnabar-island": {
+      "name": "Cinnabar Island",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-blaine",
+      "requires": [
+        "surf"
+      ],
+      "encounterMethods": {
+        "old-rod": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "surf",
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "surf",
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "surf",
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "Fishing only. The Pokemon Lab revives fossils and hosts 3 trades. Reached by Surf (Route 20 or 21), which needs the Soul Badge."
+    },
+    "saffron-city": {
+      "name": "Saffron City",
+      "hasWildEncounters": false,
+      "earliestStage": "pre-erika",
+      "typicalStage": "pre-sabrina",
+      "requires": [
+        "cut",
+        "drink"
+      ],
+      "encounterMethods": {},
+      "notes": "No wild Pokemon. Fighting Dojo (Hitmonlee/Hitmonchan) and Silph Co. (Lapras). The gate guards let you in after you hand over a drink from the Celadon rooftop. The Rocket at Silph Co.'s door leaves once Mr. Fuji is rescued."
+    },
+    "kanto-route-1": {
+      "name": "Route 1",
+      "hasWildEncounters": true,
+      "earliestStage": "start",
+      "typicalStage": "start",
+      "requires": [],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "start",
+          "typicalStage": "start",
+          "requires": []
+        }
+      },
+      "notes": "Pidgey and Rattata. Catching needs Poke Balls, which go on sale after Oak's Parcel is delivered."
+    },
+    "kanto-route-22": {
+      "name": "Route 22",
+      "hasWildEncounters": true,
+      "earliestStage": "start",
+      "typicalStage": "start",
+      "requires": [],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "start",
+          "typicalStage": "start",
+          "requires": []
+        },
+        "old-rod": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-surge",
+          "requires": [
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "West of Viridian. Grass is reachable from the start (Poke Balls come after the parcel). Water is fishable."
+    },
+    "kanto-route-2": {
+      "name": "Route 2",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-brock",
+      "typicalStage": "pre-brock",
+      "requires": [],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-brock",
+          "typicalStage": "pre-brock",
+          "requires": []
+        }
+      },
+      "notes": "One grass table covers the whole route. The east side (Mr. Mime trade house, HM05 Flash gate) needs Cut or Diglett's Cave."
+    },
+    "viridian-forest": {
+      "name": "Viridian Forest",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-brock",
+      "typicalStage": "pre-brock",
+      "requires": [],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-brock",
+          "typicalStage": "pre-brock",
+          "requires": []
+        }
+      },
+      "notes": "Bug Pokemon, plus Pikachu at a low rate."
+    },
+    "kanto-route-3": {
+      "name": "Route 3",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-misty",
+      "requires": [],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-misty",
+          "requires": []
+        }
+      },
+      "notes": "Needs the Boulder Badge, because the Pewter boy blocks the exit until Brock is beaten."
+    },
+    "mt-moon": {
+      "name": "Mt. Moon",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-misty",
+      "requires": [],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-misty",
+          "requires": []
+        }
+      },
+      "notes": "1F, B1F and B2F. Clefairy are rare. Choose the Dome or Helix Fossil at B2F. The Magikarp salesman is in the Pokemon Center outside (Route 4)."
+    },
+    "kanto-route-4": {
+      "name": "Route 4",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-misty",
+      "requires": [],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-misty",
+          "requires": []
+        },
+        "old-rod": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-surge",
+          "requires": [
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "Grass east of Mt. Moon. The pond near Cerulean has a Super Rod table too (not in PokeAPI)."
+    },
+    "kanto-route-24": {
+      "name": "Route 24 (Nugget Bridge)",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-misty",
+      "requires": [],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-misty",
+          "requires": []
+        },
+        "old-rod": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-surge",
+          "requires": [
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "Nugget Bridge north of Cerulean. Red/Blue grass tables differ."
+    },
+    "kanto-route-25": {
+      "name": "Route 25",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-misty",
+      "requires": [],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-misty",
+          "requires": []
+        },
+        "old-rod": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-surge",
+          "requires": [
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "Leads to Bill's Sea Cottage (S.S. Ticket)."
+    },
+    "kanto-route-5": {
+      "name": "Route 5",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-surge",
+      "requires": [],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-surge",
+          "requires": []
+        }
+      },
+      "notes": "South of Cerulean. Reachable pre-Misty through the burglarized house after meeting Bill, or with Cut. Red/Blue tables differ."
+    },
+    "kanto-underground-path": {
+      "name": "Underground Path (Routes 5-6)",
+      "hasWildEncounters": false,
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-surge",
+      "requires": [],
+      "encounterMethods": {},
+      "notes": "No wild Pokemon. The Nidoran trade is in the Route 5 entrance building."
+    },
+    "kanto-route-6": {
+      "name": "Route 6",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-surge",
+      "requires": [],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-surge",
+          "requires": []
+        },
+        "old-rod": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-surge",
+          "requires": [
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "North of Vermilion. Red/Blue tables differ."
+    },
+    "ss-anne": {
+      "name": "S.S. Anne",
+      "hasWildEncounters": false,
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-surge",
+      "requires": [
+        "ss-ticket"
+      ],
+      "encounterMethods": {},
+      "notes": "No wild Pokemon. Rival battle, HM01 Cut from the captain, TM08 and TM44. The ship leaves for good once you have Cut."
+    },
+    "kanto-route-11": {
+      "name": "Route 11",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-surge",
+      "requires": [],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-surge",
+          "requires": []
+        },
+        "old-rod": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-surge",
+          "requires": [
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "East of Vermilion. The Nidorina trade is in the gate. Snorlax at the east end blocks Route 12. Red/Blue tables differ."
+    },
+    "digletts-cave": {
+      "name": "Diglett's Cave",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-surge",
+      "requires": [],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-surge",
+          "requires": []
+        }
+      },
+      "notes": "Links Route 11 (near Vermilion) to Route 2's east side. Diglett and Dugtrio only."
+    },
+    "kanto-route-9": {
+      "name": "Route 9",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "requires": [
+        "cut"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "requires": [
+            "cut"
+          ]
+        }
+      },
+      "notes": "A Cut tree east of Cerulean blocks the way. Red/Blue tables differ."
+    },
+    "kanto-route-10": {
+      "name": "Route 10",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "requires": [
+        "cut"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "requires": [
+            "cut"
+          ]
+        },
+        "old-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "requires": [
+            "cut",
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "Around Rock Tunnel. You need Surf to reach the Power Plant from here."
+    },
+    "rock-tunnel": {
+      "name": "Rock Tunnel",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "requires": [
+        "cut"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "requires": [
+            "cut"
+          ]
+        }
+      },
+      "notes": "Dark without Flash (Flash is optional). PokeAPI areas rock-tunnel-b1f/b2f match pokered's 1F/B1F."
+    },
+    "lavender-town": {
+      "name": "Lavender Town",
+      "hasWildEncounters": false,
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "requires": [
+        "cut"
+      ],
+      "encounterMethods": {},
+      "notes": "No wild Pokemon. Mr. Fuji's house (Poke Flute after the Tower)."
+    },
+    "kanto-route-8": {
+      "name": "Route 8",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "requires": [
+        "cut"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "requires": [
+            "cut"
+          ]
+        }
+      },
+      "notes": "West of Lavender, linked to Route 7 by the Underground Path. Red/Blue tables differ."
+    },
+    "kanto-route-7": {
+      "name": "Route 7",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "requires": [
+        "cut"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "requires": [
+            "cut"
+          ]
+        }
+      },
+      "notes": "East of Celadon. Red/Blue tables differ."
+    },
+    "kanto-route-12": {
+      "name": "Route 12",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "requires": [
+        "cut"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute"
+          ]
+        },
+        "old-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "requires": [
+            "cut",
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "The only grass patch is south of the Snorlax, down a Cut path. The Silence Bridge piers north of the Snorlax can be fished as soon as you reach Lavender. Snorlax (Lv30) is here. The Super Rod house is south of the Snorlax, and the Lavender gate 2F gives TM39 Swift. Red/Blue tables differ."
+    },
+    "kanto-route-13": {
+      "name": "Route 13",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-koga",
+      "requires": [
+        "cut",
+        "poke-flute"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute"
+          ]
+        },
+        "old-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "Reached past a Snorlax (Route 12) or from Fuchsia. Red/Blue tables differ."
+    },
+    "kanto-route-14": {
+      "name": "Route 14",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-koga",
+      "requires": [
+        "cut",
+        "poke-flute"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute"
+          ]
+        }
+      },
+      "notes": "Red/Blue tables differ."
+    },
+    "kanto-route-15": {
+      "name": "Route 15",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-koga",
+      "requires": [
+        "cut",
+        "poke-flute"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute"
+          ]
+        }
+      },
+      "notes": "West of Fuchsia. TM20 Rage needs Cut. Red/Blue tables differ."
+    },
+    "kanto-route-16": {
+      "name": "Route 16",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-koga",
+      "requires": [
+        "cut"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut"
+          ]
+        }
+      },
+      "notes": "The grass is in the north half, past a Cut tree just west of Celadon, so the Snorlax isn't needed for it. The Fly house is there too. Snorlax (Lv30) blocks the main road to Cycling Road."
+    },
+    "kanto-route-17": {
+      "name": "Route 17 (Cycling Road)",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-koga",
+      "requires": [
+        "cut",
+        "poke-flute",
+        "bike"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "bike"
+          ]
+        },
+        "old-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "bike",
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "bike",
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "bike",
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "Needs the Bicycle and the Route 16 Snorlax woken. Fishing works here in Gen I, but Surf is not allowed."
+    },
+    "kanto-route-18": {
+      "name": "Route 18",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-koga",
+      "requires": [
+        "cut",
+        "poke-flute"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute"
+          ]
+        },
+        "old-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "The grass is on the Fuchsia side, so no bike is needed; the gate westward toward Cycling Road requires the Bicycle. The Lickitung trade is in the gate 2F."
+    },
+    "kanto-safari-zone": {
+      "name": "Safari Zone",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-koga",
+      "requires": [
+        "cut",
+        "poke-flute"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute"
+          ]
+        },
+        "old-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "Fuchsia. ¥500 entry for 30 Safari Balls and 500 steps. Four areas: middle, east, north, west. The Super Rod can hook Dratini here. HM03 Surf (Secret House) and the Gold Teeth (for HM04 Strength) are inside."
+    },
+    "pokemon-tower": {
+      "name": "Pokemon Tower",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-koga",
+      "requires": [
+        "cut",
+        "silph-scope"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "requires": [
+            "cut",
+            "silph-scope"
+          ]
+        }
+      },
+      "notes": "Wild Pokemon live on 3F-7F. Unidentified 'GHOST's can't be caught, so the Silph Scope from the Rocket Hideout is required. The rival battle on 2F doesn't need the Scope."
+    },
+    "kanto-power-plant": {
+      "name": "Power Plant",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-giovanni",
+      "requires": [
+        "cut",
+        "surf"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-giovanni",
+          "requires": [
+            "cut",
+            "surf"
+          ]
+        }
+      },
+      "notes": "Surf from Route 10. Zapdos (Lv50), plus 6 Voltorb (Lv40) and 2 Electrode (Lv43) disguised as items. Electabuzz is wild in Red only. Optional; Bulbapedia's walkthrough visits it just before the Viridian Gym."
+    },
+    "kanto-sea-route-19": {
+      "name": "Route 19 (Sea Route)",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-blaine",
+      "requires": [
+        "cut",
+        "poke-flute"
+      ],
+      "encounterMethods": {
+        "surf": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "surf"
+          ]
+        },
+        "old-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "cut",
+            "poke-flute",
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "South of Fuchsia. The beach at the north end can be fished without Surf. The surf table is Tentacool only."
+    },
+    "kanto-sea-route-20": {
+      "name": "Route 20 (Sea Route)",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-blaine",
+      "requires": [
+        "surf"
+      ],
+      "encounterMethods": {
+        "surf": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "surf"
+          ]
+        },
+        "old-rod": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "surf",
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "surf",
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "surf",
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "Between Route 19 and Cinnabar. Seafoam Islands sit in the middle. The surf table is Tentacool only."
+    },
+    "seafoam-islands": {
+      "name": "Seafoam Islands",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-blaine",
+      "requires": [
+        "surf"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "surf"
+          ]
+        },
+        "old-rod": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "surf",
+            "strength",
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "surf",
+            "strength",
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "surf",
+            "strength",
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "Needs Surf. Strength (push boulders to calm the currents) is needed to reach the fishable water on B3F/B4F and Articuno (Lv50, B4F). In caves the land table also applies while surfing."
+    },
+    "pokemon-mansion": {
+      "name": "Pokemon Mansion",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-blaine",
+      "requires": [
+        "surf"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "surf"
+          ]
+        }
+      },
+      "notes": "Cinnabar. Holds the Secret Key for Cinnabar Gym, plus TM14 and TM22 on B1F. Red/Blue tables differ (Growlithe in Red, Vulpix in Blue; Magmar only in Blue)."
+    },
+    "kanto-sea-route-21": {
+      "name": "Route 21 (Sea Route)",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-blaine",
+      "requires": [
+        "surf"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "surf"
+          ]
+        },
+        "surf": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "surf"
+          ]
+        },
+        "old-rod": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "surf",
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "surf",
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine",
+          "requires": [
+            "surf",
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "South of Pallet by Surf. It has a grass patch on land plus a surf table."
+    },
+    "kanto-route-23": {
+      "name": "Route 23",
+      "hasWildEncounters": true,
+      "earliestStage": "pre-koga",
+      "typicalStage": "elite-four",
+      "requires": [
+        "surf"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "pre-blaine",
+          "typicalStage": "elite-four",
+          "requires": [
+            "surf"
+          ]
+        },
+        "old-rod": {
+          "earliestStage": "pre-koga",
+          "typicalStage": "elite-four",
+          "requires": [
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "pre-koga",
+          "typicalStage": "elite-four",
+          "requires": [
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "pre-koga",
+          "typicalStage": "elite-four",
+          "requires": [
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "Badge checkpoints in badge order. The water is past the 4th (Rainbow) checkpoint, and the grass is past the 6th (Marsh) checkpoint and needs Surf. Most players first come here heading to Victory Road."
+    },
+    "kanto-victory-road-2": {
+      "name": "Victory Road",
+      "hasWildEncounters": true,
+      "earliestStage": "elite-four",
+      "typicalStage": "elite-four",
+      "requires": [
+        "surf",
+        "strength"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "elite-four",
+          "typicalStage": "elite-four",
+          "requires": [
+            "surf",
+            "strength"
+          ]
+        }
+      },
+      "notes": "PokeAPI slug kanto-victory-road-2 is the Gen I-III Kanto Victory Road; kanto-victory-road-1 is the Gen II/IV one. Needs all 8 badges (Route 23 gate) and Strength. Moltres (Lv50) is on 2F."
+    },
+    "indigo-plateau": {
+      "name": "Indigo Plateau",
+      "hasWildEncounters": false,
+      "earliestStage": "elite-four",
+      "typicalStage": "elite-four",
+      "requires": [
+        "surf",
+        "strength"
+      ],
+      "encounterMethods": {},
+      "notes": "No wild Pokemon. The Elite Four and the Champion."
+    },
+    "cerulean-cave": {
+      "name": "Cerulean Cave",
+      "hasWildEncounters": true,
+      "earliestStage": "post-game",
+      "typicalStage": "post-game",
+      "requires": [
+        "surf"
+      ],
+      "encounterMethods": {
+        "walk": {
+          "earliestStage": "post-game",
+          "typicalStage": "post-game",
+          "requires": [
+            "surf"
+          ]
+        },
+        "old-rod": {
+          "earliestStage": "post-game",
+          "typicalStage": "post-game",
+          "requires": [
+            "surf",
+            "old-rod"
+          ]
+        },
+        "good-rod": {
+          "earliestStage": "post-game",
+          "typicalStage": "post-game",
+          "requires": [
+            "surf",
+            "good-rod"
+          ]
+        },
+        "super-rod": {
+          "earliestStage": "post-game",
+          "typicalStage": "post-game",
+          "requires": [
+            "surf",
+            "super-rod"
+          ]
+        }
+      },
+      "notes": "Opens after you become Champion. Entered by Surf from Cerulean. Mewtwo (Lv70) is on B1F. Super Rod table: Slowbro, Seaking, Kingler, Seadra (Lv23)."
+    }
+  },
+  "exclusiveGroups": {
+    "starter": "Pick 1 of Bulbasaur, Charmander, Squirtle.",
+    "fossil": "Pick 1 of the Helix Fossil (Omanyte) or Dome Fossil (Kabuto) at Mt. Moon. The Old Amber (Aerodactyl) is separate and not exclusive.",
+    "fighting-dojo": "Pick 1 of Hitmonlee or Hitmonchan.",
+    "eevee": "Only one Eevee in the game, so only one of Vaporeon, Jolteon or Flareon per save without trading."
+  },
+  "specialAcquisitions": [
+    {
+      "species": "bulbasaur",
+      "method": "starter",
+      "location": "pallet-town",
+      "earliestStage": "start",
+      "typicalStage": "start",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": "starter",
+      "level": 5,
+      "cost": null,
+      "notes": "Pick one of the three. The rival takes the one strong against yours.",
+      "locationDetail": "Professor Oak's Lab"
+    },
+    {
+      "species": "charmander",
+      "method": "starter",
+      "location": "pallet-town",
+      "earliestStage": "start",
+      "typicalStage": "start",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": "starter",
+      "level": 5,
+      "cost": null,
+      "notes": "Pick one of the three. The rival takes the one strong against yours.",
+      "locationDetail": "Professor Oak's Lab"
+    },
+    {
+      "species": "squirtle",
+      "method": "starter",
+      "location": "pallet-town",
+      "earliestStage": "start",
+      "typicalStage": "start",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": "starter",
+      "level": 5,
+      "cost": null,
+      "notes": "Pick one of the three. The rival takes the one strong against yours.",
+      "locationDetail": "Professor Oak's Lab"
+    },
+    {
+      "species": "magikarp",
+      "method": "gift",
+      "location": "kanto-route-4",
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-misty",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 5,
+      "cost": {
+        "currency": "yen",
+        "amount": 500
+      },
+      "notes": "Sold once by the Magikarp salesman.",
+      "locationDetail": "Mt. Moon Pokemon Center (Route 4)"
+    },
+    {
+      "species": "omanyte",
+      "method": "fossil",
+      "location": "cinnabar-island",
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-blaine",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": "fossil",
+      "level": 30,
+      "cost": null,
+      "notes": "Choose the Helix Fossil (Omanyte) or the Dome Fossil (Kabuto) after beating the Super Nerd at Mt. Moon B2F. The other is lost.",
+      "locationDetail": "Helix Fossil picked at Mt. Moon B2F; revived at the Cinnabar Pokemon Lab"
+    },
+    {
+      "species": "kabuto",
+      "method": "fossil",
+      "location": "cinnabar-island",
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-blaine",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": "fossil",
+      "level": 30,
+      "cost": null,
+      "notes": "Mutually exclusive with Omanyte.",
+      "locationDetail": "Dome Fossil picked at Mt. Moon B2F; revived at the Cinnabar Pokemon Lab"
+    },
+    {
+      "species": "aerodactyl",
+      "method": "fossil",
+      "location": "cinnabar-island",
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-blaine",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 30,
+      "cost": null,
+      "notes": "Not exclusive with the Mt. Moon fossil. The Old Amber is obtainable from pre-surge (Cut).",
+      "locationDetail": "Old Amber from the Pewter Museum back room (Cut needed); revived at the Cinnabar Pokemon Lab"
+    },
+    {
+      "species": "eevee",
+      "method": "gift",
+      "location": "celadon-city",
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": "eevee",
+      "level": 25,
+      "cost": null,
+      "notes": "The only Eevee in the game, so only one of Vaporeon, Jolteon or Flareon (Water/Thunder/Fire Stone, sold at Celadon Dept. Store 4F) per save without trading.",
+      "locationDetail": "Celadon Mansion rooftop room (Poke Ball on the table)"
+    },
+    {
+      "species": "hitmonlee",
+      "method": "gift",
+      "location": "saffron-city",
+      "earliestStage": "pre-erika",
+      "typicalStage": "pre-sabrina",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": "fighting-dojo",
+      "level": 30,
+      "cost": null,
+      "notes": "Choose Hitmonlee or Hitmonchan. Saffron opens once you give a gate guard a drink.",
+      "locationDetail": "Fighting Dojo (after beating the Karate Master)"
+    },
+    {
+      "species": "hitmonchan",
+      "method": "gift",
+      "location": "saffron-city",
+      "earliestStage": "pre-erika",
+      "typicalStage": "pre-sabrina",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": "fighting-dojo",
+      "level": 30,
+      "cost": null,
+      "notes": "Mutually exclusive with Hitmonlee.",
+      "locationDetail": "Fighting Dojo (after beating the Karate Master)"
+    },
+    {
+      "species": "lapras",
+      "method": "gift",
+      "location": "saffron-city",
+      "earliestStage": "pre-erika",
+      "typicalStage": "pre-sabrina",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 15,
+      "cost": null,
+      "notes": "Silph Co. opens after Mr. Fuji is rescued (Pokemon Tower). The rival battle is in the same room.",
+      "locationDetail": "Silph Co. 7F (Silph employee)"
+    },
+    {
+      "species": "snorlax",
+      "method": "static",
+      "location": "kanto-route-12",
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-koga",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 30,
+      "cost": null,
+      "notes": "Wake it with the Poke Flute. It is a one-time battle, so knocking it out loses it.",
+      "locationDetail": "Route 12, at the Route 11 junction"
+    },
+    {
+      "species": "snorlax",
+      "method": "static",
+      "location": "kanto-route-16",
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-koga",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 30,
+      "cost": null,
+      "notes": "The second Snorlax. Needs the Poke Flute.",
+      "locationDetail": "Route 16, blocking Cycling Road"
+    },
+    {
+      "species": "voltorb",
+      "method": "static",
+      "location": "kanto-power-plant",
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-giovanni",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 40,
+      "cost": null,
+      "notes": "Disguised as an item ball. Catch it or knock it out; it doesn't respawn.",
+      "locationDetail": "Power Plant item ball #1"
+    },
+    {
+      "species": "voltorb",
+      "method": "static",
+      "location": "kanto-power-plant",
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-giovanni",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 40,
+      "cost": null,
+      "notes": "Disguised as an item ball. Catch it or knock it out; it doesn't respawn.",
+      "locationDetail": "Power Plant item ball #2"
+    },
+    {
+      "species": "voltorb",
+      "method": "static",
+      "location": "kanto-power-plant",
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-giovanni",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 40,
+      "cost": null,
+      "notes": "Disguised as an item ball. Catch it or knock it out; it doesn't respawn.",
+      "locationDetail": "Power Plant item ball #3"
+    },
+    {
+      "species": "voltorb",
+      "method": "static",
+      "location": "kanto-power-plant",
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-giovanni",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 40,
+      "cost": null,
+      "notes": "Disguised as an item ball. Catch it or knock it out; it doesn't respawn.",
+      "locationDetail": "Power Plant item ball #4"
+    },
+    {
+      "species": "voltorb",
+      "method": "static",
+      "location": "kanto-power-plant",
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-giovanni",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 40,
+      "cost": null,
+      "notes": "Disguised as an item ball. Catch it or knock it out; it doesn't respawn.",
+      "locationDetail": "Power Plant item ball #5"
+    },
+    {
+      "species": "voltorb",
+      "method": "static",
+      "location": "kanto-power-plant",
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-giovanni",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 40,
+      "cost": null,
+      "notes": "Disguised as an item ball. Catch it or knock it out; it doesn't respawn.",
+      "locationDetail": "Power Plant item ball #6"
+    },
+    {
+      "species": "electrode",
+      "method": "static",
+      "location": "kanto-power-plant",
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-giovanni",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 43,
+      "cost": null,
+      "notes": "Disguised as an item ball.",
+      "locationDetail": "Power Plant item ball (Electrode #1)"
+    },
+    {
+      "species": "electrode",
+      "method": "static",
+      "location": "kanto-power-plant",
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-giovanni",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 43,
+      "cost": null,
+      "notes": "Disguised as an item ball.",
+      "locationDetail": "Power Plant item ball (Electrode #2)"
+    },
+    {
+      "species": "zapdos",
+      "method": "static",
+      "location": "kanto-power-plant",
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-giovanni",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 50,
+      "cost": null,
+      "notes": "Needs Surf to reach.",
+      "locationDetail": "Power Plant, far west room"
+    },
+    {
+      "species": "articuno",
+      "method": "static",
+      "location": "seafoam-islands",
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-blaine",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 50,
+      "cost": null,
+      "notes": "Needs Surf and Strength to push the boulders that calm the currents.",
+      "locationDetail": "Seafoam Islands B4F"
+    },
+    {
+      "species": "moltres",
+      "method": "static",
+      "location": "kanto-victory-road-2",
+      "earliestStage": "elite-four",
+      "typicalStage": "elite-four",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 50,
+      "cost": null,
+      "notes": "",
+      "locationDetail": "Victory Road 2F"
+    },
+    {
+      "species": "mewtwo",
+      "method": "static",
+      "location": "cerulean-cave",
+      "earliestStage": "post-game",
+      "typicalStage": "post-game",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 70,
+      "cost": null,
+      "notes": "Post-game only.",
+      "locationDetail": "Cerulean Cave B1F"
+    },
+    {
+      "species": "abra",
+      "method": "prize",
+      "location": "celadon-city",
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "versions": [
+        "red"
+      ],
+      "exclusiveGroup": null,
+      "level": 9,
+      "cost": {
+        "currency": "coins",
+        "amount": 180
+      },
+      "notes": "Needs the Coin Case (Celadon Diner). Coins cost ¥1000 per 50 at the Game Corner, and you can also win them at the slots. Prizes can be bought again and again.",
+      "locationDetail": "Rocket Game Corner prize exchange"
+    },
+    {
+      "species": "abra",
+      "method": "prize",
+      "location": "celadon-city",
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "versions": [
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 6,
+      "cost": {
+        "currency": "coins",
+        "amount": 120
+      },
+      "notes": "Needs the Coin Case (Celadon Diner). Coins cost ¥1000 per 50 at the Game Corner, and you can also win them at the slots. Prizes can be bought again and again.",
+      "locationDetail": "Rocket Game Corner prize exchange"
+    },
+    {
+      "species": "clefairy",
+      "method": "prize",
+      "location": "celadon-city",
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "versions": [
+        "red"
+      ],
+      "exclusiveGroup": null,
+      "level": 8,
+      "cost": {
+        "currency": "coins",
+        "amount": 500
+      },
+      "notes": "Needs the Coin Case (Celadon Diner). Coins cost ¥1000 per 50 at the Game Corner, and you can also win them at the slots. Prizes can be bought again and again.",
+      "locationDetail": "Rocket Game Corner prize exchange"
+    },
+    {
+      "species": "clefairy",
+      "method": "prize",
+      "location": "celadon-city",
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "versions": [
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 12,
+      "cost": {
+        "currency": "coins",
+        "amount": 750
+      },
+      "notes": "Needs the Coin Case (Celadon Diner). Coins cost ¥1000 per 50 at the Game Corner, and you can also win them at the slots. Prizes can be bought again and again.",
+      "locationDetail": "Rocket Game Corner prize exchange"
+    },
+    {
+      "species": "nidorina",
+      "method": "prize",
+      "location": "celadon-city",
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "versions": [
+        "red"
+      ],
+      "exclusiveGroup": null,
+      "level": 17,
+      "cost": {
+        "currency": "coins",
+        "amount": 1200
+      },
+      "notes": "Needs the Coin Case (Celadon Diner). Coins cost ¥1000 per 50 at the Game Corner, and you can also win them at the slots. Prizes can be bought again and again.",
+      "locationDetail": "Rocket Game Corner prize exchange"
+    },
+    {
+      "species": "nidorino",
+      "method": "prize",
+      "location": "celadon-city",
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "versions": [
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 17,
+      "cost": {
+        "currency": "coins",
+        "amount": 1200
+      },
+      "notes": "Needs the Coin Case (Celadon Diner). Coins cost ¥1000 per 50 at the Game Corner, and you can also win them at the slots. Prizes can be bought again and again.",
+      "locationDetail": "Rocket Game Corner prize exchange"
+    },
+    {
+      "species": "dratini",
+      "method": "prize",
+      "location": "celadon-city",
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "versions": [
+        "red"
+      ],
+      "exclusiveGroup": null,
+      "level": 18,
+      "cost": {
+        "currency": "coins",
+        "amount": 2800
+      },
+      "notes": "Needs the Coin Case (Celadon Diner). Coins cost ¥1000 per 50 at the Game Corner, and you can also win them at the slots. Prizes can be bought again and again. Dratini can also be fished with the Super Rod in the Safari Zone.",
+      "locationDetail": "Rocket Game Corner prize exchange"
+    },
+    {
+      "species": "dratini",
+      "method": "prize",
+      "location": "celadon-city",
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "versions": [
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 24,
+      "cost": {
+        "currency": "coins",
+        "amount": 4600
+      },
+      "notes": "Needs the Coin Case (Celadon Diner). Coins cost ¥1000 per 50 at the Game Corner, and you can also win them at the slots. Prizes can be bought again and again. Dratini can also be fished with the Super Rod in the Safari Zone.",
+      "locationDetail": "Rocket Game Corner prize exchange"
+    },
+    {
+      "species": "scyther",
+      "method": "prize",
+      "location": "celadon-city",
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "versions": [
+        "red"
+      ],
+      "exclusiveGroup": null,
+      "level": 25,
+      "cost": {
+        "currency": "coins",
+        "amount": 5500
+      },
+      "notes": "Needs the Coin Case (Celadon Diner). Coins cost ¥1000 per 50 at the Game Corner, and you can also win them at the slots. Prizes can be bought again and again. Also wild in the Red Safari Zone.",
+      "locationDetail": "Rocket Game Corner prize exchange"
+    },
+    {
+      "species": "pinsir",
+      "method": "prize",
+      "location": "celadon-city",
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "versions": [
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 20,
+      "cost": {
+        "currency": "coins",
+        "amount": 2500
+      },
+      "notes": "Needs the Coin Case (Celadon Diner). Coins cost ¥1000 per 50 at the Game Corner, and you can also win them at the slots. Prizes can be bought again and again. Also wild in the Blue Safari Zone.",
+      "locationDetail": "Rocket Game Corner prize exchange"
+    },
+    {
+      "species": "porygon",
+      "method": "prize",
+      "location": "celadon-city",
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "versions": [
+        "red"
+      ],
+      "exclusiveGroup": null,
+      "level": 26,
+      "cost": {
+        "currency": "coins",
+        "amount": 9999
+      },
+      "notes": "Needs the Coin Case (Celadon Diner). Coins cost ¥1000 per 50 at the Game Corner, and you can also win them at the slots. Prizes can be bought again and again. Porygon is only available this way.",
+      "locationDetail": "Rocket Game Corner prize exchange"
+    },
+    {
+      "species": "porygon",
+      "method": "prize",
+      "location": "celadon-city",
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-erika",
+      "versions": [
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": 18,
+      "cost": {
+        "currency": "coins",
+        "amount": 6500
+      },
+      "notes": "Needs the Coin Case (Celadon Diner). Coins cost ¥1000 per 50 at the Game Corner, and you can also win them at the slots. Prizes can be bought again and again. Porygon is only available this way.",
+      "locationDetail": "Rocket Game Corner prize exchange"
+    },
+    {
+      "species": "mrmime",
+      "method": "trade",
+      "location": "kanto-route-2",
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-surge",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": null,
+      "cost": null,
+      "notes": "Give abra, get mrmime nicknamed MARCEL. It arrives at the same level as the Pokemon you trade away. Traded Pokemon gain boosted EXP but disobey above your badge obedience cap. Same trade in English Red and Blue. Abra is wild on Routes 24/25 in both versions.",
+      "locationDetail": "Route 2 trade house (east side, south of Diglett's Cave)",
+      "give": "abra",
+      "nickname": "MARCEL"
+    },
+    {
+      "species": "nidoranf",
+      "method": "trade",
+      "location": "kanto-underground-path",
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-surge",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": null,
+      "cost": null,
+      "notes": "Give nidoranm, get nidoranf nicknamed SPOT. It arrives at the same level as the Pokemon you trade away. Traded Pokemon gain boosted EXP but disobey above your badge obedience cap. Same trade in English Red and Blue.",
+      "locationDetail": "Underground Path Route 5 entrance building",
+      "give": "nidoranm",
+      "nickname": "SPOT"
+    },
+    {
+      "species": "nidorina",
+      "method": "trade",
+      "location": "kanto-route-11",
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-surge",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": null,
+      "cost": null,
+      "notes": "Give nidorino, get nidorina nicknamed TERRY. It arrives at the same level as the Pokemon you trade away. Traded Pokemon gain boosted EXP but disobey above your badge obedience cap. Same trade in English Red and Blue.",
+      "locationDetail": "Route 11 gate 2F",
+      "give": "nidorino",
+      "nickname": "TERRY"
+    },
+    {
+      "species": "jynx",
+      "method": "trade",
+      "location": "cerulean-city",
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-koga",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": null,
+      "cost": null,
+      "notes": "Give poliwhirl, get jynx nicknamed LOLA. It arrives at the same level as the Pokemon you trade away. Traded Pokemon gain boosted EXP but disobey above your badge obedience cap. Same trade in English Red and Blue. The trade house is open from your first visit to Cerulean, but Poliwhirl isn't found in grass. It comes from the Super Rod at Celadon City or Route 10 (Lv23), or from evolving a rod-caught Poliwag at Lv25, so the stages reflect when you can get a Poliwhirl.",
+      "locationDetail": "Cerulean City trade house",
+      "give": "poliwhirl",
+      "nickname": "LOLA"
+    },
+    {
+      "species": "farfetchd",
+      "method": "trade",
+      "location": "vermilion-city",
+      "earliestStage": "pre-misty",
+      "typicalStage": "pre-surge",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": null,
+      "cost": null,
+      "notes": "Give spearow, get farfetchd nicknamed DUX. It arrives at the same level as the Pokemon you trade away. Traded Pokemon gain boosted EXP but disobey above your badge obedience cap. Same trade in English Red and Blue.",
+      "locationDetail": "Vermilion City trade house",
+      "give": "spearow",
+      "nickname": "DUX"
+    },
+    {
+      "species": "lickitung",
+      "method": "trade",
+      "location": "kanto-route-18",
+      "earliestStage": "pre-surge",
+      "typicalStage": "pre-koga",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": null,
+      "cost": null,
+      "notes": "Give slowbro, get lickitung nicknamed MARC. It arrives at the same level as the Pokemon you trade away. Traded Pokemon gain boosted EXP but disobey above your badge obedience cap. Same trade in English Red and Blue. Slowbro is wild in Seafoam Islands and on the Super Rod at Route 23 and Cerulean Cave, or evolve a Slowpoke (Super Rod) at Lv37.",
+      "locationDetail": "Route 18 gate 2F",
+      "give": "slowbro",
+      "nickname": "MARC"
+    },
+    {
+      "species": "seel",
+      "method": "trade",
+      "location": "cinnabar-island",
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-blaine",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": null,
+      "cost": null,
+      "notes": "Give ponyta, get seel nicknamed SAILOR. It arrives at the same level as the Pokemon you trade away. Traded Pokemon gain boosted EXP but disobey above your badge obedience cap. Same trade in English Red and Blue.",
+      "locationDetail": "Cinnabar Pokemon Lab (fossil room)",
+      "give": "ponyta",
+      "nickname": "SAILOR"
+    },
+    {
+      "species": "electrode",
+      "method": "trade",
+      "location": "cinnabar-island",
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-blaine",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": null,
+      "cost": null,
+      "notes": "Give raichu, get electrode nicknamed DORIS. It arrives at the same level as the Pokemon you trade away. Traded Pokemon gain boosted EXP but disobey above your badge obedience cap. Same trade in English Red and Blue.",
+      "locationDetail": "Cinnabar Pokemon Lab (trade room)",
+      "give": "raichu",
+      "nickname": "DORIS"
+    },
+    {
+      "species": "tangela",
+      "method": "trade",
+      "location": "cinnabar-island",
+      "earliestStage": "pre-sabrina",
+      "typicalStage": "pre-blaine",
+      "versions": [
+        "red",
+        "blue"
+      ],
+      "exclusiveGroup": null,
+      "level": null,
+      "cost": null,
+      "notes": "Give venonat, get tangela nicknamed CRINKLES. It arrives at the same level as the Pokemon you trade away. Traded Pokemon gain boosted EXP but disobey above your badge obedience cap. Same trade in English Red and Blue.",
+      "locationDetail": "Cinnabar Pokemon Lab (trade room)",
+      "give": "venonat",
+      "nickname": "CRINKLES"
+    }
+  ],
+  "tradeEvolutions": [
+    {
+      "from": "kadabra",
+      "to": "alakazam",
+      "notes": "Evolves when traded (any level). Needs a second game or a trade partner."
+    },
+    {
+      "from": "graveler",
+      "to": "golem",
+      "notes": "Evolves when traded (any level). Needs a second game or a trade partner."
+    },
+    {
+      "from": "machoke",
+      "to": "machamp",
+      "notes": "Evolves when traded (any level). Needs a second game or a trade partner."
+    },
+    {
+      "from": "haunter",
+      "to": "gengar",
+      "notes": "Evolves when traded (any level). Needs a second game or a trade partner."
+    }
+  ],
+  "versionExclusives": {
+    "red": [
+      "ekans",
+      "arbok",
+      "oddish",
+      "gloom",
+      "vileplume",
+      "mankey",
+      "primeape",
+      "growlithe",
+      "arcanine",
+      "scyther",
+      "electabuzz"
+    ],
+    "blue": [
+      "sandshrew",
+      "sandslash",
+      "vulpix",
+      "ninetales",
+      "meowth",
+      "persian",
+      "bellsprout",
+      "weepinbell",
+      "victreebel",
+      "magmar",
+      "pinsir"
+    ],
+    "notes": "Species obtainable, by catching or evolving, in only one version. Scyther and Pinsir are also Game Corner prizes, but only in the version that already has them in the Safari Zone. Game Corner prices and levels for Abra, Clefairy, Dratini and Porygon differ by version; Red sells Nidorina and Blue sells Nidorino, but both are wild in both versions. Electabuzz is wild in the Power Plant in Red only; Magmar is wild in the Pokemon Mansion in Blue only.",
+    "wildOnlyExclusivesBeforeEvolution": {
+      "red": [
+        "ekans",
+        "arbok",
+        "oddish",
+        "gloom",
+        "mankey",
+        "growlithe",
+        "scyther",
+        "electabuzz"
+      ],
+      "blue": [
+        "sandshrew",
+        "sandslash",
+        "vulpix",
+        "meowth",
+        "bellsprout",
+        "weepinbell",
+        "magmar",
+        "pinsir"
+      ]
+    }
+  },
+  "unobtainable": [
+    {
+      "species": "mew",
+      "notes": "Only from official distribution events (or glitches). It can't be obtained in normal Red/Blue play."
+    }
+  ],
+  "unobtainableNotes": "Every other species is obtainable across both versions together. Without trading, each version is missing its counterpart's exclusives plus the trade evolutions (Alakazam, Machamp, Golem, Gengar). NPC-trade-only species (Mr. Mime, Farfetch'd, Jynx, Lickitung) are available in both versions from in-game trades. Missing in Red alone (no trading): sandshrew, sandslash, vulpix, ninetales, meowth, persian, alakazam, machamp, bellsprout, weepinbell, victreebel, golem, gengar, magmar, pinsir, mew. Missing in Blue alone: ekans, arbok, oddish, gloom, vileplume, mankey, primeape, growlithe, arcanine, alakazam, machamp, golem, gengar, scyther, electabuzz, mew.",
+  "trainers": [
+    {
+      "id": "brock",
+      "name": "Brock",
+      "kind": "gym",
+      "stageBefore": "pre-brock",
+      "location": "pewter-city",
+      "locationDetail": "Pewter Gym",
+      "badge": "Boulder Badge",
+      "badgeEffects": {
+        "statBoost": "attack",
+        "fieldMove": "flash",
+        "obedienceLevel": null
+      },
+      "type": "rock",
+      "rewardTM": "TM34 Bide",
+      "team": [
+        {
+          "species": "geodude",
+          "level": 12,
+          "moves": [
+            "tackle",
+            "defensecurl"
+          ]
+        },
+        {
+          "species": "onix",
+          "level": 14,
+          "moves": [
+            "tackle",
+            "screech",
+            "bide"
+          ]
+        }
+      ],
+      "notes": "Onix's Bide is its gym-leader signature move."
+    },
+    {
+      "id": "misty",
+      "name": "Misty",
+      "kind": "gym",
+      "stageBefore": "pre-misty",
+      "location": "cerulean-city",
+      "locationDetail": "Cerulean Gym",
+      "badge": "Cascade Badge",
+      "badgeEffects": {
+        "statBoost": null,
+        "fieldMove": "cut",
+        "obedienceLevel": 30
+      },
+      "type": "water",
+      "rewardTM": "TM11 BubbleBeam",
+      "team": [
+        {
+          "species": "staryu",
+          "level": 18,
+          "moves": [
+            "tackle",
+            "watergun"
+          ]
+        },
+        {
+          "species": "starmie",
+          "level": 21,
+          "moves": [
+            "tackle",
+            "watergun",
+            "bubblebeam"
+          ]
+        }
+      ],
+      "notes": "Starmie's BubbleBeam is its signature move (it replaces Harden)."
+    },
+    {
+      "id": "lt-surge",
+      "name": "Lt. Surge",
+      "kind": "gym",
+      "stageBefore": "pre-surge",
+      "location": "vermilion-city",
+      "locationDetail": "Vermilion Gym",
+      "badge": "Thunder Badge",
+      "badgeEffects": {
+        "statBoost": "defense",
+        "fieldMove": "fly",
+        "obedienceLevel": null
+      },
+      "type": "electric",
+      "rewardTM": "TM24 Thunderbolt",
+      "team": [
+        {
+          "species": "voltorb",
+          "level": 21,
+          "moves": [
+            "tackle",
+            "screech",
+            "sonicboom"
+          ]
+        },
+        {
+          "species": "pikachu",
+          "level": 18,
+          "moves": [
+            "thundershock",
+            "growl",
+            "thunderwave",
+            "quickattack"
+          ]
+        },
+        {
+          "species": "raichu",
+          "level": 24,
+          "moves": [
+            "thundershock",
+            "growl",
+            "thunderbolt"
+          ]
+        }
+      ],
+      "notes": "Raichu's Thunderbolt replaces Thunder Wave."
+    },
+    {
+      "id": "erika",
+      "name": "Erika",
+      "kind": "gym",
+      "stageBefore": "pre-erika",
+      "location": "celadon-city",
+      "locationDetail": "Celadon Gym",
+      "badge": "Rainbow Badge",
+      "badgeEffects": {
+        "statBoost": null,
+        "fieldMove": "strength",
+        "obedienceLevel": 50
+      },
+      "type": "grass",
+      "rewardTM": "TM21 Mega Drain",
+      "team": [
+        {
+          "species": "victreebel",
+          "level": 29,
+          "moves": [
+            "razorleaf",
+            "wrap",
+            "poisonpowder",
+            "sleeppowder"
+          ]
+        },
+        {
+          "species": "tangela",
+          "level": 24,
+          "moves": [
+            "constrict",
+            "bind"
+          ]
+        },
+        {
+          "species": "vileplume",
+          "level": 29,
+          "moves": [
+            "petaldance",
+            "poisonpowder",
+            "megadrain",
+            "sleeppowder"
+          ]
+        }
+      ],
+      "notes": "Vileplume's Mega Drain is its signature move."
+    },
+    {
+      "id": "koga",
+      "name": "Koga",
+      "kind": "gym",
+      "stageBefore": "pre-koga",
+      "location": "fuchsia-city",
+      "locationDetail": "Fuchsia Gym",
+      "badge": "Soul Badge",
+      "badgeEffects": {
+        "statBoost": "speed",
+        "fieldMove": "surf",
+        "obedienceLevel": null
+      },
+      "type": "poison",
+      "rewardTM": "TM06 Toxic",
+      "team": [
+        {
+          "species": "koffing",
+          "level": 37,
+          "moves": [
+            "tackle",
+            "smog",
+            "sludge",
+            "smokescreen"
+          ]
+        },
+        {
+          "species": "muk",
+          "level": 39,
+          "moves": [
+            "disable",
+            "poisongas",
+            "minimize",
+            "sludge"
+          ]
+        },
+        {
+          "species": "koffing",
+          "level": 37,
+          "moves": [
+            "tackle",
+            "smog",
+            "sludge",
+            "smokescreen"
+          ]
+        },
+        {
+          "species": "weezing",
+          "level": 43,
+          "moves": [
+            "smog",
+            "sludge",
+            "toxic",
+            "selfdestruct"
+          ]
+        }
+      ],
+      "notes": "Weezing's Toxic is its signature move."
+    },
+    {
+      "id": "sabrina",
+      "name": "Sabrina",
+      "kind": "gym",
+      "stageBefore": "pre-sabrina",
+      "location": "saffron-city",
+      "locationDetail": "Saffron Gym",
+      "badge": "Marsh Badge",
+      "badgeEffects": {
+        "statBoost": null,
+        "fieldMove": null,
+        "obedienceLevel": 70
+      },
+      "type": "psychic",
+      "rewardTM": "TM46 Psywave",
+      "team": [
+        {
+          "species": "kadabra",
+          "level": 38,
+          "moves": [
+            "disable",
+            "psybeam",
+            "recover",
+            "psychic"
+          ]
+        },
+        {
+          "species": "mrmime",
+          "level": 37,
+          "moves": [
+            "confusion",
+            "barrier",
+            "lightscreen",
+            "doubleslap"
+          ]
+        },
+        {
+          "species": "venomoth",
+          "level": 38,
+          "moves": [
+            "poisonpowder",
+            "leechlife",
+            "stunspore",
+            "psybeam"
+          ]
+        },
+        {
+          "species": "alakazam",
+          "level": 43,
+          "moves": [
+            "psybeam",
+            "recover",
+            "psywave",
+            "reflect"
+          ]
+        }
+      ],
+      "notes": "Alakazam's Psywave is its signature move (it replaces Psychic). You can fight Sabrina before Koga; Bulbapedia's walkthrough does."
+    },
+    {
+      "id": "blaine",
+      "name": "Blaine",
+      "kind": "gym",
+      "stageBefore": "pre-blaine",
+      "location": "cinnabar-island",
+      "locationDetail": "Cinnabar Gym",
+      "badge": "Volcano Badge",
+      "badgeEffects": {
+        "statBoost": "special",
+        "fieldMove": null,
+        "obedienceLevel": null
+      },
+      "type": "fire",
+      "rewardTM": "TM38 Fire Blast",
+      "team": [
+        {
+          "species": "growlithe",
+          "level": 42,
+          "moves": [
+            "ember",
+            "leer",
+            "takedown",
+            "agility"
+          ]
+        },
+        {
+          "species": "ponyta",
+          "level": 40,
+          "moves": [
+            "tailwhip",
+            "stomp",
+            "growl",
+            "firespin"
+          ]
+        },
+        {
+          "species": "rapidash",
+          "level": 42,
+          "moves": [
+            "tailwhip",
+            "stomp",
+            "growl",
+            "firespin"
+          ]
+        },
+        {
+          "species": "arcanine",
+          "level": 47,
+          "moves": [
+            "roar",
+            "ember",
+            "fireblast",
+            "takedown"
+          ]
+        }
+      ],
+      "notes": "Arcanine's Fire Blast is its signature move. The Gym needs the Secret Key from the Pokemon Mansion."
+    },
+    {
+      "id": "giovanni-gym",
+      "name": "Giovanni",
+      "kind": "gym",
+      "stageBefore": "pre-giovanni",
+      "location": "viridian-city",
+      "locationDetail": "Viridian Gym",
+      "badge": "Earth Badge",
+      "badgeEffects": {
+        "statBoost": null,
+        "fieldMove": null,
+        "obedienceLevel": "all"
+      },
+      "type": "ground",
+      "rewardTM": "TM27 Fissure",
+      "team": [
+        {
+          "species": "rhyhorn",
+          "level": 45,
+          "moves": [
+            "stomp",
+            "tailwhip",
+            "furyattack",
+            "horndrill"
+          ]
+        },
+        {
+          "species": "dugtrio",
+          "level": 42,
+          "moves": [
+            "growl",
+            "dig",
+            "sandattack",
+            "slash"
+          ]
+        },
+        {
+          "species": "nidoqueen",
+          "level": 44,
+          "moves": [
+            "scratch",
+            "tailwhip",
+            "bodyslam",
+            "poisonsting"
+          ]
+        },
+        {
+          "species": "nidoking",
+          "level": 45,
+          "moves": [
+            "tackle",
+            "hornattack",
+            "poisonsting",
+            "thrash"
+          ]
+        },
+        {
+          "species": "rhydon",
+          "level": 50,
+          "moves": [
+            "stomp",
+            "tailwhip",
+            "fissure",
+            "horndrill"
+          ]
+        }
+      ],
+      "notes": "Rhydon's Fissure is its signature move (slot 3). The Gym is locked until you have the other 7 badges."
+    },
+    {
+      "id": "lorelei",
+      "name": "Lorelei",
+      "kind": "elite4",
+      "stageBefore": "elite-four",
+      "location": "indigo-plateau",
+      "locationDetail": "Indigo Plateau",
+      "badge": null,
+      "type": "ice",
+      "rewardTM": null,
+      "team": [
+        {
+          "species": "dewgong",
+          "level": 54,
+          "moves": [
+            "growl",
+            "aurorabeam",
+            "rest",
+            "takedown"
+          ]
+        },
+        {
+          "species": "cloyster",
+          "level": 53,
+          "moves": [
+            "supersonic",
+            "clamp",
+            "aurorabeam",
+            "spikecannon"
+          ]
+        },
+        {
+          "species": "slowbro",
+          "level": 54,
+          "moves": [
+            "growl",
+            "watergun",
+            "withdraw",
+            "amnesia"
+          ]
+        },
+        {
+          "species": "jynx",
+          "level": 56,
+          "moves": [
+            "doubleslap",
+            "icepunch",
+            "bodyslam",
+            "thrash"
+          ]
+        },
+        {
+          "species": "lapras",
+          "level": 56,
+          "moves": [
+            "bodyslam",
+            "confuseray",
+            "blizzard",
+            "hydropump"
+          ]
+        }
+      ],
+      "notes": "Lapras has Blizzard (Elite Four signature move in slot 3). All four must be beaten in a row."
+    },
+    {
+      "id": "bruno",
+      "name": "Bruno",
+      "kind": "elite4",
+      "stageBefore": "elite-four",
+      "location": "indigo-plateau",
+      "locationDetail": "Indigo Plateau",
+      "badge": null,
+      "type": "fighting",
+      "rewardTM": null,
+      "team": [
+        {
+          "species": "onix",
+          "level": 53,
+          "moves": [
+            "rockthrow",
+            "rage",
+            "slam",
+            "harden"
+          ]
+        },
+        {
+          "species": "hitmonchan",
+          "level": 55,
+          "moves": [
+            "icepunch",
+            "thunderpunch",
+            "megapunch",
+            "counter"
+          ]
+        },
+        {
+          "species": "hitmonlee",
+          "level": 55,
+          "moves": [
+            "jumpkick",
+            "focusenergy",
+            "highjumpkick",
+            "megakick"
+          ]
+        },
+        {
+          "species": "onix",
+          "level": 56,
+          "moves": [
+            "rockthrow",
+            "rage",
+            "slam",
+            "harden"
+          ]
+        },
+        {
+          "species": "machamp",
+          "level": 58,
+          "moves": [
+            "leer",
+            "focusenergy",
+            "fissure",
+            "submission"
+          ]
+        }
+      ],
+      "notes": "Machamp has Fissure (slot 3). Both Onix are Rock/Ground, not Fighting. All four must be beaten in a row."
+    },
+    {
+      "id": "agatha",
+      "name": "Agatha",
+      "kind": "elite4",
+      "stageBefore": "elite-four",
+      "location": "indigo-plateau",
+      "locationDetail": "Indigo Plateau",
+      "badge": null,
+      "type": "ghost",
+      "rewardTM": null,
+      "team": [
+        {
+          "species": "gengar",
+          "level": 56,
+          "moves": [
+            "confuseray",
+            "nightshade",
+            "hypnosis",
+            "dreameater"
+          ]
+        },
+        {
+          "species": "golbat",
+          "level": 56,
+          "moves": [
+            "supersonic",
+            "confuseray",
+            "wingattack",
+            "haze"
+          ]
+        },
+        {
+          "species": "haunter",
+          "level": 55,
+          "moves": [
+            "confuseray",
+            "nightshade",
+            "hypnosis",
+            "dreameater"
+          ]
+        },
+        {
+          "species": "arbok",
+          "level": 58,
+          "moves": [
+            "bite",
+            "glare",
+            "screech",
+            "acid"
+          ]
+        },
+        {
+          "species": "gengar",
+          "level": 60,
+          "moves": [
+            "confuseray",
+            "nightshade",
+            "toxic",
+            "dreameater"
+          ]
+        }
+      ],
+      "notes": "The Lv60 Gengar has Toxic (slot 3). In Gen I her Ghost moves can't touch Psychic types and Night Shade does fixed damage equal to the user's level. All four must be beaten in a row."
+    },
+    {
+      "id": "lance",
+      "name": "Lance",
+      "kind": "elite4",
+      "stageBefore": "elite-four",
+      "location": "indigo-plateau",
+      "locationDetail": "Indigo Plateau",
+      "badge": null,
+      "type": "dragon",
+      "rewardTM": null,
+      "team": [
+        {
+          "species": "gyarados",
+          "level": 58,
+          "moves": [
+            "dragonrage",
+            "leer",
+            "hydropump",
+            "hyperbeam"
+          ]
+        },
+        {
+          "species": "dragonair",
+          "level": 56,
+          "moves": [
+            "agility",
+            "slam",
+            "dragonrage",
+            "hyperbeam"
+          ]
+        },
+        {
+          "species": "dragonair",
+          "level": 56,
+          "moves": [
+            "agility",
+            "slam",
+            "dragonrage",
+            "hyperbeam"
+          ]
+        },
+        {
+          "species": "aerodactyl",
+          "level": 60,
+          "moves": [
+            "supersonic",
+            "bite",
+            "takedown",
+            "hyperbeam"
+          ]
+        },
+        {
+          "species": "dragonite",
+          "level": 62,
+          "moves": [
+            "agility",
+            "slam",
+            "barrier",
+            "hyperbeam"
+          ]
+        }
+      ],
+      "notes": "Dragonite has Barrier (slot 3). Only Dragonite and the Dragonairs are Dragon type; Dragon Rage always does 40 HP. All four must be beaten in a row."
+    },
+    {
+      "id": "rival-1-oaks-lab",
+      "name": "Rival (1) - Oak's Lab",
+      "kind": "rival",
+      "stageBefore": "start",
+      "location": "pallet-town",
+      "locationDetail": "Professor Oak's Lab",
+      "badge": null,
+      "type": null,
+      "rewardTM": null,
+      "teamsByPlayerStarter": {
+        "bulbasaur": [
+          {
+            "species": "charmander",
+            "level": 5,
+            "moves": [
+              "scratch",
+              "growl"
+            ]
+          }
+        ],
+        "charmander": [
+          {
+            "species": "squirtle",
+            "level": 5,
+            "moves": [
+              "tackle",
+              "tailwhip"
+            ]
+          }
+        ],
+        "squirtle": [
+          {
+            "species": "bulbasaur",
+            "level": 5,
+            "moves": [
+              "tackle",
+              "growl"
+            ]
+          }
+        ]
+      },
+      "notes": "Unavoidable first battle. You can lose it without penalty. Keyed by the starter the PLAYER picked. The rival's team varies with it."
+    },
+    {
+      "id": "rival-2-route-22",
+      "name": "Rival (2) - Route 22",
+      "kind": "rival",
+      "stageBefore": "pre-brock",
+      "location": "kanto-route-22",
+      "locationDetail": "Route 22",
+      "badge": null,
+      "type": null,
+      "rewardTM": null,
+      "teamsByPlayerStarter": {
+        "bulbasaur": [
+          {
+            "species": "pidgey",
+            "level": 9,
+            "moves": [
+              "gust",
+              "sandattack"
+            ]
+          },
+          {
+            "species": "charmander",
+            "level": 8,
+            "moves": [
+              "scratch",
+              "growl"
+            ]
+          }
+        ],
+        "charmander": [
+          {
+            "species": "pidgey",
+            "level": 9,
+            "moves": [
+              "gust",
+              "sandattack"
+            ]
+          },
+          {
+            "species": "squirtle",
+            "level": 8,
+            "moves": [
+              "tackle",
+              "tailwhip",
+              "bubble"
+            ]
+          }
+        ],
+        "squirtle": [
+          {
+            "species": "pidgey",
+            "level": 9,
+            "moves": [
+              "gust",
+              "sandattack"
+            ]
+          },
+          {
+            "species": "bulbasaur",
+            "level": 8,
+            "moves": [
+              "tackle",
+              "growl",
+              "leechseed"
+            ]
+          }
+        ]
+      },
+      "notes": "Optional. Only appears after delivering Oak's Parcel and before beating Brock. Keyed by the starter the PLAYER picked. The rival's team varies with it."
+    },
+    {
+      "id": "rival-3-cerulean",
+      "name": "Rival (3) - Cerulean City",
+      "kind": "rival",
+      "stageBefore": "pre-misty",
+      "location": "cerulean-city",
+      "locationDetail": "North Cerulean, south end of Nugget Bridge",
+      "badge": null,
+      "type": null,
+      "rewardTM": null,
+      "teamsByPlayerStarter": {
+        "bulbasaur": [
+          {
+            "species": "pidgeotto",
+            "level": 18,
+            "moves": [
+              "gust",
+              "sandattack",
+              "quickattack"
+            ]
+          },
+          {
+            "species": "abra",
+            "level": 15,
+            "moves": [
+              "teleport"
+            ]
+          },
+          {
+            "species": "rattata",
+            "level": 15,
+            "moves": [
+              "tackle",
+              "tailwhip",
+              "quickattack",
+              "hyperfang"
+            ]
+          },
+          {
+            "species": "charmander",
+            "level": 17,
+            "moves": [
+              "scratch",
+              "growl",
+              "ember",
+              "leer"
+            ]
+          }
+        ],
+        "charmander": [
+          {
+            "species": "pidgeotto",
+            "level": 18,
+            "moves": [
+              "gust",
+              "sandattack",
+              "quickattack"
+            ]
+          },
+          {
+            "species": "abra",
+            "level": 15,
+            "moves": [
+              "teleport"
+            ]
+          },
+          {
+            "species": "rattata",
+            "level": 15,
+            "moves": [
+              "tackle",
+              "tailwhip",
+              "quickattack",
+              "hyperfang"
+            ]
+          },
+          {
+            "species": "squirtle",
+            "level": 17,
+            "moves": [
+              "tackle",
+              "tailwhip",
+              "bubble",
+              "watergun"
+            ]
+          }
+        ],
+        "squirtle": [
+          {
+            "species": "pidgeotto",
+            "level": 18,
+            "moves": [
+              "gust",
+              "sandattack",
+              "quickattack"
+            ]
+          },
+          {
+            "species": "abra",
+            "level": 15,
+            "moves": [
+              "teleport"
+            ]
+          },
+          {
+            "species": "rattata",
+            "level": 15,
+            "moves": [
+              "tackle",
+              "tailwhip",
+              "quickattack",
+              "hyperfang"
+            ]
+          },
+          {
+            "species": "bulbasaur",
+            "level": 17,
+            "moves": [
+              "tackle",
+              "growl",
+              "leechseed",
+              "vinewhip"
+            ]
+          }
+        ]
+      },
+      "notes": " Keyed by the starter the PLAYER picked. The rival's team varies with it."
+    },
+    {
+      "id": "rival-4-ss-anne",
+      "name": "Rival (4) - S.S. Anne",
+      "kind": "rival",
+      "stageBefore": "pre-surge",
+      "location": "ss-anne",
+      "locationDetail": "S.S. Anne 2F",
+      "badge": null,
+      "type": null,
+      "rewardTM": null,
+      "teamsByPlayerStarter": {
+        "bulbasaur": [
+          {
+            "species": "pidgeotto",
+            "level": 19,
+            "moves": [
+              "gust",
+              "sandattack",
+              "quickattack"
+            ]
+          },
+          {
+            "species": "raticate",
+            "level": 16,
+            "moves": [
+              "tackle",
+              "tailwhip",
+              "quickattack",
+              "hyperfang"
+            ]
+          },
+          {
+            "species": "kadabra",
+            "level": 18,
+            "moves": [
+              "teleport",
+              "confusion",
+              "disable"
+            ]
+          },
+          {
+            "species": "charmeleon",
+            "level": 20,
+            "moves": [
+              "scratch",
+              "growl",
+              "ember",
+              "leer"
+            ]
+          }
+        ],
+        "charmander": [
+          {
+            "species": "pidgeotto",
+            "level": 19,
+            "moves": [
+              "gust",
+              "sandattack",
+              "quickattack"
+            ]
+          },
+          {
+            "species": "raticate",
+            "level": 16,
+            "moves": [
+              "tackle",
+              "tailwhip",
+              "quickattack",
+              "hyperfang"
+            ]
+          },
+          {
+            "species": "kadabra",
+            "level": 18,
+            "moves": [
+              "teleport",
+              "confusion",
+              "disable"
+            ]
+          },
+          {
+            "species": "wartortle",
+            "level": 20,
+            "moves": [
+              "tackle",
+              "tailwhip",
+              "bubble",
+              "watergun"
+            ]
+          }
+        ],
+        "squirtle": [
+          {
+            "species": "pidgeotto",
+            "level": 19,
+            "moves": [
+              "gust",
+              "sandattack",
+              "quickattack"
+            ]
+          },
+          {
+            "species": "raticate",
+            "level": 16,
+            "moves": [
+              "tackle",
+              "tailwhip",
+              "quickattack",
+              "hyperfang"
+            ]
+          },
+          {
+            "species": "kadabra",
+            "level": 18,
+            "moves": [
+              "teleport",
+              "confusion",
+              "disable"
+            ]
+          },
+          {
+            "species": "ivysaur",
+            "level": 20,
+            "moves": [
+              "tackle",
+              "growl",
+              "leechseed",
+              "vinewhip"
+            ]
+          }
+        ]
+      },
+      "notes": " Keyed by the starter the PLAYER picked. The rival's team varies with it."
+    },
+    {
+      "id": "rival-5-pokemon-tower",
+      "name": "Rival (5) - Pokemon Tower",
+      "kind": "rival",
+      "stageBefore": "pre-koga",
+      "location": "pokemon-tower",
+      "locationDetail": "Pokemon Tower 2F",
+      "badge": null,
+      "type": null,
+      "rewardTM": null,
+      "teamsByPlayerStarter": {
+        "bulbasaur": [
+          {
+            "species": "pidgeotto",
+            "level": 25,
+            "moves": [
+              "gust",
+              "sandattack",
+              "quickattack",
+              "whirlwind"
+            ]
+          },
+          {
+            "species": "exeggcute",
+            "level": 23,
+            "moves": [
+              "barrage",
+              "hypnosis"
+            ]
+          },
+          {
+            "species": "gyarados",
+            "level": 22,
+            "moves": [
+              "bite",
+              "dragonrage",
+              "leer",
+              "hydropump"
+            ]
+          },
+          {
+            "species": "kadabra",
+            "level": 20,
+            "moves": [
+              "teleport",
+              "confusion",
+              "disable"
+            ]
+          },
+          {
+            "species": "charmeleon",
+            "level": 25,
+            "moves": [
+              "growl",
+              "ember",
+              "leer",
+              "rage"
+            ]
+          }
+        ],
+        "charmander": [
+          {
+            "species": "pidgeotto",
+            "level": 25,
+            "moves": [
+              "gust",
+              "sandattack",
+              "quickattack",
+              "whirlwind"
+            ]
+          },
+          {
+            "species": "growlithe",
+            "level": 23,
+            "moves": [
+              "bite",
+              "roar",
+              "ember",
+              "leer"
+            ]
+          },
+          {
+            "species": "exeggcute",
+            "level": 22,
+            "moves": [
+              "barrage",
+              "hypnosis"
+            ]
+          },
+          {
+            "species": "kadabra",
+            "level": 20,
+            "moves": [
+              "teleport",
+              "confusion",
+              "disable"
+            ]
+          },
+          {
+            "species": "wartortle",
+            "level": 25,
+            "moves": [
+              "tailwhip",
+              "bubble",
+              "watergun",
+              "bite"
+            ]
+          }
+        ],
+        "squirtle": [
+          {
+            "species": "pidgeotto",
+            "level": 25,
+            "moves": [
+              "gust",
+              "sandattack",
+              "quickattack",
+              "whirlwind"
+            ]
+          },
+          {
+            "species": "gyarados",
+            "level": 23,
+            "moves": [
+              "bite",
+              "dragonrage",
+              "leer",
+              "hydropump"
+            ]
+          },
+          {
+            "species": "growlithe",
+            "level": 22,
+            "moves": [
+              "bite",
+              "roar",
+              "ember"
+            ]
+          },
+          {
+            "species": "kadabra",
+            "level": 20,
+            "moves": [
+              "teleport",
+              "confusion",
+              "disable"
+            ]
+          },
+          {
+            "species": "ivysaur",
+            "level": 25,
+            "moves": [
+              "growl",
+              "leechseed",
+              "vinewhip",
+              "poisonpowder"
+            ]
+          }
+        ]
+      },
+      "notes": "Doesn't need the Silph Scope, so it can be fought on your first visit to Lavender (pre-erika). Bulbapedia's walkthrough has it after Celadon. Bulbapedia lists the player-Charmander Growlithe (Lv23) as Bite/Roar/Ember, but Growlithe learns Leer at Lv23 (pokered), so the computed set includes Leer. Keyed by the starter the PLAYER picked. The rival's team varies with it."
+    },
+    {
+      "id": "rival-6-silph-co",
+      "name": "Rival (6) - Silph Co.",
+      "kind": "rival",
+      "stageBefore": "pre-sabrina",
+      "location": "saffron-city",
+      "locationDetail": "Silph Co. 7F",
+      "badge": null,
+      "type": null,
+      "rewardTM": null,
+      "teamsByPlayerStarter": {
+        "bulbasaur": [
+          {
+            "species": "pidgeot",
+            "level": 37,
+            "moves": [
+              "sandattack",
+              "quickattack",
+              "whirlwind",
+              "wingattack"
+            ]
+          },
+          {
+            "species": "exeggcute",
+            "level": 38,
+            "moves": [
+              "reflect",
+              "leechseed",
+              "stunspore",
+              "poisonpowder"
+            ]
+          },
+          {
+            "species": "gyarados",
+            "level": 35,
+            "moves": [
+              "bite",
+              "dragonrage",
+              "leer",
+              "hydropump"
+            ]
+          },
+          {
+            "species": "alakazam",
+            "level": 35,
+            "moves": [
+              "confusion",
+              "disable",
+              "psybeam",
+              "recover"
+            ]
+          },
+          {
+            "species": "charizard",
+            "level": 40,
+            "moves": [
+              "ember",
+              "leer",
+              "rage",
+              "slash"
+            ]
+          }
+        ],
+        "charmander": [
+          {
+            "species": "pidgeot",
+            "level": 37,
+            "moves": [
+              "sandattack",
+              "quickattack",
+              "whirlwind",
+              "wingattack"
+            ]
+          },
+          {
+            "species": "growlithe",
+            "level": 38,
+            "moves": [
+              "roar",
+              "ember",
+              "leer",
+              "takedown"
+            ]
+          },
+          {
+            "species": "exeggcute",
+            "level": 35,
+            "moves": [
+              "hypnosis",
+              "reflect",
+              "leechseed",
+              "stunspore"
+            ]
+          },
+          {
+            "species": "alakazam",
+            "level": 35,
+            "moves": [
+              "confusion",
+              "disable",
+              "psybeam",
+              "recover"
+            ]
+          },
+          {
+            "species": "blastoise",
+            "level": 40,
+            "moves": [
+              "bubble",
+              "watergun",
+              "bite",
+              "withdraw"
+            ]
+          }
+        ],
+        "squirtle": [
+          {
+            "species": "pidgeot",
+            "level": 37,
+            "moves": [
+              "sandattack",
+              "quickattack",
+              "whirlwind",
+              "wingattack"
+            ]
+          },
+          {
+            "species": "gyarados",
+            "level": 38,
+            "moves": [
+              "bite",
+              "dragonrage",
+              "leer",
+              "hydropump"
+            ]
+          },
+          {
+            "species": "growlithe",
+            "level": 35,
+            "moves": [
+              "roar",
+              "ember",
+              "leer",
+              "takedown"
+            ]
+          },
+          {
+            "species": "alakazam",
+            "level": 35,
+            "moves": [
+              "confusion",
+              "disable",
+              "psybeam",
+              "recover"
+            ]
+          },
+          {
+            "species": "venusaur",
+            "level": 40,
+            "moves": [
+              "leechseed",
+              "vinewhip",
+              "poisonpowder",
+              "razorleaf"
+            ]
+          }
+        ]
+      },
+      "notes": " Keyed by the starter the PLAYER picked. The rival's team varies with it."
+    },
+    {
+      "id": "rival-7-route-22",
+      "name": "Rival (7) - Route 22",
+      "kind": "rival",
+      "stageBefore": "elite-four",
+      "location": "kanto-route-22",
+      "locationDetail": "Route 22 (before the Pokemon League gate)",
+      "badge": null,
+      "type": null,
+      "rewardTM": null,
+      "teamsByPlayerStarter": {
+        "bulbasaur": [
+          {
+            "species": "pidgeot",
+            "level": 47,
+            "moves": [
+              "quickattack",
+              "whirlwind",
+              "wingattack",
+              "agility"
+            ]
+          },
+          {
+            "species": "rhyhorn",
+            "level": 45,
+            "moves": [
+              "stomp",
+              "tailwhip",
+              "furyattack",
+              "horndrill"
+            ]
+          },
+          {
+            "species": "exeggcute",
+            "level": 45,
+            "moves": [
+              "leechseed",
+              "stunspore",
+              "poisonpowder",
+              "solarbeam"
+            ]
+          },
+          {
+            "species": "gyarados",
+            "level": 47,
+            "moves": [
+              "bite",
+              "dragonrage",
+              "leer",
+              "hydropump"
+            ]
+          },
+          {
+            "species": "alakazam",
+            "level": 50,
+            "moves": [
+              "psybeam",
+              "recover",
+              "psychic",
+              "reflect"
+            ]
+          },
+          {
+            "species": "charizard",
+            "level": 53,
+            "moves": [
+              "leer",
+              "rage",
+              "slash",
+              "flamethrower"
+            ]
+          }
+        ],
+        "charmander": [
+          {
+            "species": "pidgeot",
+            "level": 47,
+            "moves": [
+              "quickattack",
+              "whirlwind",
+              "wingattack",
+              "agility"
+            ]
+          },
+          {
+            "species": "rhyhorn",
+            "level": 45,
+            "moves": [
+              "stomp",
+              "tailwhip",
+              "furyattack",
+              "horndrill"
+            ]
+          },
+          {
+            "species": "growlithe",
+            "level": 45,
+            "moves": [
+              "ember",
+              "leer",
+              "takedown",
+              "agility"
+            ]
+          },
+          {
+            "species": "exeggcute",
+            "level": 47,
+            "moves": [
+              "leechseed",
+              "stunspore",
+              "poisonpowder",
+              "solarbeam"
+            ]
+          },
+          {
+            "species": "alakazam",
+            "level": 50,
+            "moves": [
+              "psybeam",
+              "recover",
+              "psychic",
+              "reflect"
+            ]
+          },
+          {
+            "species": "blastoise",
+            "level": 53,
+            "moves": [
+              "bite",
+              "withdraw",
+              "skullbash",
+              "hydropump"
+            ]
+          }
+        ],
+        "squirtle": [
+          {
+            "species": "pidgeot",
+            "level": 47,
+            "moves": [
+              "quickattack",
+              "whirlwind",
+              "wingattack",
+              "agility"
+            ]
+          },
+          {
+            "species": "rhyhorn",
+            "level": 45,
+            "moves": [
+              "stomp",
+              "tailwhip",
+              "furyattack",
+              "horndrill"
+            ]
+          },
+          {
+            "species": "gyarados",
+            "level": 45,
+            "moves": [
+              "bite",
+              "dragonrage",
+              "leer",
+              "hydropump"
+            ]
+          },
+          {
+            "species": "growlithe",
+            "level": 47,
+            "moves": [
+              "ember",
+              "leer",
+              "takedown",
+              "agility"
+            ]
+          },
+          {
+            "species": "alakazam",
+            "level": 50,
+            "moves": [
+              "psybeam",
+              "recover",
+              "psychic",
+              "reflect"
+            ]
+          },
+          {
+            "species": "venusaur",
+            "level": 53,
+            "moves": [
+              "vinewhip",
+              "poisonpowder",
+              "razorleaf",
+              "growth"
+            ]
+          }
+        ]
+      },
+      "notes": "Appears after the Earth Badge. Keyed by the starter the PLAYER picked. The rival's team varies with it."
+    },
+    {
+      "id": "champion",
+      "name": "Champion (Rival)",
+      "kind": "champion",
+      "stageBefore": "elite-four",
+      "location": "indigo-plateau",
+      "locationDetail": "Indigo Plateau, Champion's room",
+      "badge": null,
+      "type": null,
+      "rewardTM": null,
+      "teamsByPlayerStarter": {
+        "bulbasaur": [
+          {
+            "species": "pidgeot",
+            "level": 61,
+            "moves": [
+              "whirlwind",
+              "wingattack",
+              "skyattack",
+              "mirrormove"
+            ]
+          },
+          {
+            "species": "alakazam",
+            "level": 59,
+            "moves": [
+              "psybeam",
+              "recover",
+              "psychic",
+              "reflect"
+            ]
+          },
+          {
+            "species": "rhydon",
+            "level": 61,
+            "moves": [
+              "tailwhip",
+              "furyattack",
+              "horndrill",
+              "leer"
+            ]
+          },
+          {
+            "species": "exeggutor",
+            "level": 61,
+            "moves": [
+              "barrage",
+              "hypnosis",
+              "stomp"
+            ]
+          },
+          {
+            "species": "gyarados",
+            "level": 63,
+            "moves": [
+              "dragonrage",
+              "leer",
+              "hydropump",
+              "hyperbeam"
+            ]
+          },
+          {
+            "species": "charizard",
+            "level": 65,
+            "moves": [
+              "rage",
+              "slash",
+              "fireblast",
+              "firespin"
+            ]
+          }
+        ],
+        "charmander": [
+          {
+            "species": "pidgeot",
+            "level": 61,
+            "moves": [
+              "whirlwind",
+              "wingattack",
+              "skyattack",
+              "mirrormove"
+            ]
+          },
+          {
+            "species": "alakazam",
+            "level": 59,
+            "moves": [
+              "psybeam",
+              "recover",
+              "psychic",
+              "reflect"
+            ]
+          },
+          {
+            "species": "rhydon",
+            "level": 61,
+            "moves": [
+              "tailwhip",
+              "furyattack",
+              "horndrill",
+              "leer"
+            ]
+          },
+          {
+            "species": "arcanine",
+            "level": 61,
+            "moves": [
+              "roar",
+              "ember",
+              "leer",
+              "takedown"
+            ]
+          },
+          {
+            "species": "exeggutor",
+            "level": 63,
+            "moves": [
+              "barrage",
+              "hypnosis",
+              "stomp"
+            ]
+          },
+          {
+            "species": "blastoise",
+            "level": 65,
+            "moves": [
+              "bite",
+              "withdraw",
+              "blizzard",
+              "hydropump"
+            ]
+          }
+        ],
+        "squirtle": [
+          {
+            "species": "pidgeot",
+            "level": 61,
+            "moves": [
+              "whirlwind",
+              "wingattack",
+              "skyattack",
+              "mirrormove"
+            ]
+          },
+          {
+            "species": "alakazam",
+            "level": 59,
+            "moves": [
+              "psybeam",
+              "recover",
+              "psychic",
+              "reflect"
+            ]
+          },
+          {
+            "species": "rhydon",
+            "level": 61,
+            "moves": [
+              "tailwhip",
+              "furyattack",
+              "horndrill",
+              "leer"
+            ]
+          },
+          {
+            "species": "gyarados",
+            "level": 61,
+            "moves": [
+              "dragonrage",
+              "leer",
+              "hydropump",
+              "hyperbeam"
+            ]
+          },
+          {
+            "species": "arcanine",
+            "level": 63,
+            "moves": [
+              "roar",
+              "ember",
+              "leer",
+              "takedown"
+            ]
+          },
+          {
+            "species": "venusaur",
+            "level": 65,
+            "moves": [
+              "razorleaf",
+              "growth",
+              "megadrain",
+              "solarbeam"
+            ]
+          }
+        ]
+      },
+      "notes": "Keyed by the starter the PLAYER picked. Custom moves: Pidgeot Sky Attack, plus the starter gets Mega Drain (Venusaur), Fire Blast (Charizard) or Blizzard (Blastoise), all in slot 3."
+    },
+    {
+      "id": "giovanni-rocket-hideout",
+      "name": "Giovanni (Rocket Hideout)",
+      "kind": "rocket",
+      "stageBefore": "pre-koga",
+      "location": "celadon-city",
+      "locationDetail": "Rocket Hideout B4F (under the Game Corner)",
+      "badge": null,
+      "type": null,
+      "rewardTM": null,
+      "team": [
+        {
+          "species": "onix",
+          "level": 25,
+          "moves": [
+            "screech",
+            "bind",
+            "rockthrow",
+            "rage"
+          ]
+        },
+        {
+          "species": "rhyhorn",
+          "level": 24,
+          "moves": [
+            "hornattack"
+          ]
+        },
+        {
+          "species": "kangaskhan",
+          "level": 29,
+          "moves": [
+            "cometpunch",
+            "rage",
+            "bite"
+          ]
+        }
+      ],
+      "notes": "Drops the Silph Scope. Possible as early as pre-erika (strict: pre-surge). Bulbapedia's walkthrough clears the Hideout after Erika."
+    },
+    {
+      "id": "giovanni-silph-co",
+      "name": "Giovanni (Silph Co.)",
+      "kind": "rocket",
+      "stageBefore": "pre-sabrina",
+      "location": "saffron-city",
+      "locationDetail": "Silph Co. 11F",
+      "badge": null,
+      "type": null,
+      "rewardTM": null,
+      "team": [
+        {
+          "species": "nidorino",
+          "level": 37,
+          "moves": [
+            "hornattack",
+            "poisonsting",
+            "focusenergy",
+            "furyattack"
+          ]
+        },
+        {
+          "species": "kangaskhan",
+          "level": 35,
+          "moves": [
+            "cometpunch",
+            "rage",
+            "bite",
+            "tailwhip"
+          ]
+        },
+        {
+          "species": "rhyhorn",
+          "level": 37,
+          "moves": [
+            "hornattack",
+            "stomp",
+            "tailwhip"
+          ]
+        },
+        {
+          "species": "nidoqueen",
+          "level": 41,
+          "moves": [
+            "scratch",
+            "tailwhip",
+            "bodyslam",
+            "poisonsting"
+          ]
+        }
+      ],
+      "notes": "Beating him frees Saffron. The Silph president then gives the Master Ball."
+    }
+  ],
+  "tms": [
+    {
+      "id": "TM01",
+      "move": "megapunch",
+      "moveName": "Mega Punch",
+      "gen1Name": "Mega Punch",
+      "locations": [
+        {
+          "where": "Mt. Moon B2F",
+          "locationSlug": "mt-moon",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-misty"
+        },
+        {
+          "where": "Celadon Dept. Store 2F",
+          "locationSlug": "celadon-city",
+          "how": "buy",
+          "price": {
+            "currency": "yen",
+            "amount": 3000
+          },
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "note": "Unlimited purchases."
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": "celadon-dept-store",
+      "notes": "Unlimited at Celadon Dept. Store 2F for ¥3000."
+    },
+    {
+      "id": "TM02",
+      "move": "razorwind",
+      "moveName": "Razor Wind",
+      "gen1Name": "Razor Wind",
+      "locations": [
+        {
+          "where": "Rocket Hideout B4F",
+          "locationSlug": "celadon-city",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga"
+        },
+        {
+          "where": "Celadon Dept. Store 2F",
+          "locationSlug": "celadon-city",
+          "how": "buy",
+          "price": {
+            "currency": "yen",
+            "amount": 2000
+          },
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "note": "Unlimited purchases."
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": "celadon-dept-store",
+      "notes": "Unlimited at Celadon Dept. Store 2F for ¥2000."
+    },
+    {
+      "id": "TM03",
+      "move": "swordsdance",
+      "moveName": "Swords Dance",
+      "gen1Name": "Swords Dance",
+      "locations": [
+        {
+          "where": "Silph Co. 7F",
+          "locationSlug": "saffron-city",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-sabrina"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM04",
+      "move": "whirlwind",
+      "moveName": "Whirlwind",
+      "gen1Name": "Whirlwind",
+      "locations": [
+        {
+          "where": "Route 4 (north plateau east of Mt. Moon)",
+          "locationSlug": "kanto-route-4",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-misty"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM05",
+      "move": "megakick",
+      "moveName": "Mega Kick",
+      "gen1Name": "Mega Kick",
+      "locations": [
+        {
+          "where": "Victory Road 2F",
+          "locationSlug": "kanto-victory-road-2",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "elite-four",
+          "typicalStage": "elite-four"
+        },
+        {
+          "where": "Celadon Dept. Store 2F",
+          "locationSlug": "celadon-city",
+          "how": "buy",
+          "price": {
+            "currency": "yen",
+            "amount": 3000
+          },
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "note": "Unlimited purchases."
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": "celadon-dept-store",
+      "notes": "Unlimited at Celadon Dept. Store 2F for ¥3000."
+    },
+    {
+      "id": "TM06",
+      "move": "toxic",
+      "moveName": "Toxic",
+      "gen1Name": "Toxic",
+      "locations": [
+        {
+          "where": "Fuchsia Gym (Koga)",
+          "locationSlug": "fuchsia-city",
+          "how": "gym",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-koga",
+          "typicalStage": "pre-koga"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM07",
+      "move": "horndrill",
+      "moveName": "Horn Drill",
+      "gen1Name": "Horn Drill",
+      "locations": [
+        {
+          "where": "Rocket Hideout B2F",
+          "locationSlug": "celadon-city",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga"
+        },
+        {
+          "where": "Celadon Dept. Store 2F",
+          "locationSlug": "celadon-city",
+          "how": "buy",
+          "price": {
+            "currency": "yen",
+            "amount": 2000
+          },
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "note": "Unlimited purchases."
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": "celadon-dept-store",
+      "notes": "Unlimited at Celadon Dept. Store 2F for ¥2000."
+    },
+    {
+      "id": "TM08",
+      "move": "bodyslam",
+      "moveName": "Body Slam",
+      "gen1Name": "Body Slam",
+      "locations": [
+        {
+          "where": "S.S. Anne 1F rooms",
+          "locationSlug": "ss-anne",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-surge",
+          "note": "Missable: the S.S. Anne leaves once you have Cut."
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM09",
+      "move": "takedown",
+      "moveName": "Take Down",
+      "gen1Name": "Take Down",
+      "locations": [
+        {
+          "where": "Silph Co. 5F",
+          "locationSlug": "saffron-city",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-sabrina"
+        },
+        {
+          "where": "Celadon Dept. Store 2F",
+          "locationSlug": "celadon-city",
+          "how": "buy",
+          "price": {
+            "currency": "yen",
+            "amount": 3000
+          },
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "note": "Unlimited purchases."
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": "celadon-dept-store",
+      "notes": "Unlimited at Celadon Dept. Store 2F for ¥3000."
+    },
+    {
+      "id": "TM10",
+      "move": "doubleedge",
+      "moveName": "Double-Edge",
+      "gen1Name": "Double-Edge",
+      "locations": [
+        {
+          "where": "Rocket Hideout B3F",
+          "locationSlug": "celadon-city",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM11",
+      "move": "bubblebeam",
+      "moveName": "Bubble Beam",
+      "gen1Name": "BubbleBeam",
+      "locations": [
+        {
+          "where": "Cerulean Gym (Misty)",
+          "locationSlug": "cerulean-city",
+          "how": "gym",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-misty"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM12",
+      "move": "watergun",
+      "moveName": "Water Gun",
+      "gen1Name": "Water Gun",
+      "locations": [
+        {
+          "where": "Mt. Moon 1F",
+          "locationSlug": "mt-moon",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-misty"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM13",
+      "move": "icebeam",
+      "moveName": "Ice Beam",
+      "gen1Name": "Ice Beam",
+      "locations": [
+        {
+          "where": "Celadon Dept. Store rooftop (give the girl Fresh Water)",
+          "locationSlug": "celadon-city",
+          "how": "npc",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "note": "One-time. Drinks come from the rooftop vending machines: Fresh Water ¥200, Soda Pop ¥300, Lemonade ¥350."
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM14",
+      "move": "blizzard",
+      "moveName": "Blizzard",
+      "gen1Name": "Blizzard",
+      "locations": [
+        {
+          "where": "Pokemon Mansion B1F",
+          "locationSlug": "pokemon-mansion",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM15",
+      "move": "hyperbeam",
+      "moveName": "Hyper Beam",
+      "gen1Name": "Hyper Beam",
+      "locations": [
+        {
+          "where": "Rocket Game Corner prize exchange",
+          "locationSlug": "celadon-city",
+          "how": "prize",
+          "price": {
+            "currency": "coins",
+            "amount": 5500
+          },
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "note": "Can be bought again and again."
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": "game-corner",
+      "notes": "Unlimited from the Game Corner for coins."
+    },
+    {
+      "id": "TM16",
+      "move": "payday",
+      "moveName": "Pay Day",
+      "gen1Name": "Pay Day",
+      "locations": [
+        {
+          "where": "Route 12 island southeast of the Lavender gate (needs Surf)",
+          "locationSlug": "kanto-route-12",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-sabrina"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM17",
+      "move": "submission",
+      "moveName": "Submission",
+      "gen1Name": "Submission",
+      "locations": [
+        {
+          "where": "Victory Road 2F",
+          "locationSlug": "kanto-victory-road-2",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "elite-four",
+          "typicalStage": "elite-four"
+        },
+        {
+          "where": "Celadon Dept. Store 2F",
+          "locationSlug": "celadon-city",
+          "how": "buy",
+          "price": {
+            "currency": "yen",
+            "amount": 3000
+          },
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "note": "Unlimited purchases."
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": "celadon-dept-store",
+      "notes": "Unlimited at Celadon Dept. Store 2F for ¥3000."
+    },
+    {
+      "id": "TM18",
+      "move": "counter",
+      "moveName": "Counter",
+      "gen1Name": "Counter",
+      "locations": [
+        {
+          "where": "Celadon Dept. Store 3F (man behind the counter)",
+          "locationSlug": "celadon-city",
+          "how": "npc",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM19",
+      "move": "seismictoss",
+      "moveName": "Seismic Toss",
+      "gen1Name": "Seismic Toss",
+      "locations": [
+        {
+          "where": "Route 25 (behind a trainer or Cut tree)",
+          "locationSlug": "kanto-route-25",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-misty"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM20",
+      "move": "rage",
+      "moveName": "Rage",
+      "gen1Name": "Rage",
+      "locations": [
+        {
+          "where": "Route 15 northwest area (needs Cut)",
+          "locationSlug": "kanto-route-15",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM21",
+      "move": "megadrain",
+      "moveName": "Mega Drain",
+      "gen1Name": "Mega Drain",
+      "locations": [
+        {
+          "where": "Celadon Gym (Erika)",
+          "locationSlug": "celadon-city",
+          "how": "gym",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-erika",
+          "typicalStage": "pre-erika"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM22",
+      "move": "solarbeam",
+      "moveName": "Solar Beam",
+      "gen1Name": "SolarBeam",
+      "locations": [
+        {
+          "where": "Pokemon Mansion B1F",
+          "locationSlug": "pokemon-mansion",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM23",
+      "move": "dragonrage",
+      "moveName": "Dragon Rage",
+      "gen1Name": "Dragon Rage",
+      "locations": [
+        {
+          "where": "Rocket Game Corner prize exchange",
+          "locationSlug": "celadon-city",
+          "how": "prize",
+          "price": {
+            "currency": "coins",
+            "amount": 3300
+          },
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "note": "Can be bought again and again."
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": "game-corner",
+      "notes": "Unlimited from the Game Corner for coins."
+    },
+    {
+      "id": "TM24",
+      "move": "thunderbolt",
+      "moveName": "Thunderbolt",
+      "gen1Name": "Thunderbolt",
+      "locations": [
+        {
+          "where": "Vermilion Gym (Lt. Surge)",
+          "locationSlug": "vermilion-city",
+          "how": "gym",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-surge"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM25",
+      "move": "thunder",
+      "moveName": "Thunder",
+      "gen1Name": "Thunder",
+      "locations": [
+        {
+          "where": "Power Plant",
+          "locationSlug": "kanto-power-plant",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-giovanni"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM26",
+      "move": "earthquake",
+      "moveName": "Earthquake",
+      "gen1Name": "Earthquake",
+      "locations": [
+        {
+          "where": "Silph Co. 10F",
+          "locationSlug": "saffron-city",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-sabrina"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM27",
+      "move": "fissure",
+      "moveName": "Fissure",
+      "gen1Name": "Fissure",
+      "locations": [
+        {
+          "where": "Viridian Gym (Giovanni)",
+          "locationSlug": "viridian-city",
+          "how": "gym",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-giovanni",
+          "typicalStage": "pre-giovanni"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM28",
+      "move": "dig",
+      "moveName": "Dig",
+      "gen1Name": "Dig",
+      "locations": [
+        {
+          "where": "Cerulean City (beat the Rocket behind the burglarized house)",
+          "locationSlug": "cerulean-city",
+          "how": "npc",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-misty",
+          "note": "The house opens after you meet Bill."
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM29",
+      "move": "psychic",
+      "moveName": "Psychic",
+      "gen1Name": "Psychic",
+      "locations": [
+        {
+          "where": "Saffron City, Mr. Psychic's house",
+          "locationSlug": "saffron-city",
+          "how": "npc",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-erika",
+          "typicalStage": "pre-sabrina"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM30",
+      "move": "teleport",
+      "moveName": "Teleport",
+      "gen1Name": "Teleport",
+      "locations": [
+        {
+          "where": "Route 9 (southwest corner)",
+          "locationSlug": "kanto-route-9",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM31",
+      "move": "mimic",
+      "moveName": "Mimic",
+      "gen1Name": "Mimic",
+      "locations": [
+        {
+          "where": "Saffron City, Copycat's house 2F (give her a Poke Doll)",
+          "locationSlug": "saffron-city",
+          "how": "npc",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-erika",
+          "typicalStage": "pre-sabrina"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM32",
+      "move": "doubleteam",
+      "moveName": "Double Team",
+      "gen1Name": "Double Team",
+      "locations": [
+        {
+          "where": "Safari Zone West",
+          "locationSlug": "kanto-safari-zone",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga"
+        },
+        {
+          "where": "Celadon Dept. Store 2F",
+          "locationSlug": "celadon-city",
+          "how": "buy",
+          "price": {
+            "currency": "yen",
+            "amount": 1000
+          },
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "note": "Unlimited purchases."
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": "celadon-dept-store",
+      "notes": "Unlimited at Celadon Dept. Store 2F for ¥1000."
+    },
+    {
+      "id": "TM33",
+      "move": "reflect",
+      "moveName": "Reflect",
+      "gen1Name": "Reflect",
+      "locations": [
+        {
+          "where": "Power Plant",
+          "locationSlug": "kanto-power-plant",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-giovanni"
+        },
+        {
+          "where": "Celadon Dept. Store 2F",
+          "locationSlug": "celadon-city",
+          "how": "buy",
+          "price": {
+            "currency": "yen",
+            "amount": 1000
+          },
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "note": "Unlimited purchases."
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": "celadon-dept-store",
+      "notes": "Unlimited at Celadon Dept. Store 2F for ¥1000."
+    },
+    {
+      "id": "TM34",
+      "move": "bide",
+      "moveName": "Bide",
+      "gen1Name": "Bide",
+      "locations": [
+        {
+          "where": "Pewter Gym (Brock)",
+          "locationSlug": "pewter-city",
+          "how": "gym",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-brock",
+          "typicalStage": "pre-brock"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM35",
+      "move": "metronome",
+      "moveName": "Metronome",
+      "gen1Name": "Metronome",
+      "locations": [
+        {
+          "where": "Cinnabar Pokemon Lab (Metronome room)",
+          "locationSlug": "cinnabar-island",
+          "how": "npc",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-blaine"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM36",
+      "move": "selfdestruct",
+      "moveName": "Self-Destruct",
+      "gen1Name": "Selfdestruct",
+      "locations": [
+        {
+          "where": "Silph Co. 2F (Silph worker)",
+          "locationSlug": "saffron-city",
+          "how": "npc",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-sabrina"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM37",
+      "move": "eggbomb",
+      "moveName": "Egg Bomb",
+      "gen1Name": "Egg Bomb",
+      "locations": [
+        {
+          "where": "Safari Zone East",
+          "locationSlug": "kanto-safari-zone",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga"
+        },
+        {
+          "where": "Celadon Dept. Store 2F",
+          "locationSlug": "celadon-city",
+          "how": "buy",
+          "price": {
+            "currency": "yen",
+            "amount": 2000
+          },
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "note": "Unlimited purchases."
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": "celadon-dept-store",
+      "notes": "Unlimited at Celadon Dept. Store 2F for ¥2000."
+    },
+    {
+      "id": "TM38",
+      "move": "fireblast",
+      "moveName": "Fire Blast",
+      "gen1Name": "Fire Blast",
+      "locations": [
+        {
+          "where": "Cinnabar Gym (Blaine)",
+          "locationSlug": "cinnabar-island",
+          "how": "gym",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-blaine",
+          "typicalStage": "pre-blaine"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM39",
+      "move": "swift",
+      "moveName": "Swift",
+      "gen1Name": "Swift",
+      "locations": [
+        {
+          "where": "Route 12, Lavender-side gate 2F (girl)",
+          "locationSlug": "kanto-route-12",
+          "how": "npc",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM40",
+      "move": "skullbash",
+      "moveName": "Skull Bash",
+      "gen1Name": "Skull Bash",
+      "locations": [
+        {
+          "where": "Safari Zone North",
+          "locationSlug": "kanto-safari-zone",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM41",
+      "move": "softboiled",
+      "moveName": "Soft-Boiled",
+      "gen1Name": "Softboiled",
+      "locations": [
+        {
+          "where": "Celadon City, man north of the pond (needs Surf)",
+          "locationSlug": "celadon-city",
+          "how": "npc",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-sabrina"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM42",
+      "move": "dreameater",
+      "moveName": "Dream Eater",
+      "gen1Name": "Dream Eater",
+      "locations": [
+        {
+          "where": "Viridian City, sleeping man in the southwest (needs Cut or Surf)",
+          "locationSlug": "viridian-city",
+          "how": "npc",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-surge"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM43",
+      "move": "skyattack",
+      "moveName": "Sky Attack",
+      "gen1Name": "Sky Attack",
+      "locations": [
+        {
+          "where": "Victory Road 1F",
+          "locationSlug": "kanto-victory-road-2",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "elite-four",
+          "typicalStage": "elite-four"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM44",
+      "move": "rest",
+      "moveName": "Rest",
+      "gen1Name": "Rest",
+      "locations": [
+        {
+          "where": "S.S. Anne B1F rooms",
+          "locationSlug": "ss-anne",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-surge",
+          "note": "Missable: the S.S. Anne leaves once you have Cut."
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM45",
+      "move": "thunderwave",
+      "moveName": "Thunder Wave",
+      "gen1Name": "Thunder Wave",
+      "locations": [
+        {
+          "where": "Route 24 (plateau in the northwest)",
+          "locationSlug": "kanto-route-24",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-misty"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM46",
+      "move": "psywave",
+      "moveName": "Psywave",
+      "gen1Name": "Psywave",
+      "locations": [
+        {
+          "where": "Saffron Gym (Sabrina)",
+          "locationSlug": "saffron-city",
+          "how": "gym",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-sabrina",
+          "typicalStage": "pre-sabrina"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM47",
+      "move": "explosion",
+      "moveName": "Explosion",
+      "gen1Name": "Explosion",
+      "locations": [
+        {
+          "where": "Victory Road 3F",
+          "locationSlug": "kanto-victory-road-2",
+          "how": "ground",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "elite-four",
+          "typicalStage": "elite-four"
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM48",
+      "move": "rockslide",
+      "moveName": "Rock Slide",
+      "gen1Name": "Rock Slide",
+      "locations": [
+        {
+          "where": "Celadon Dept. Store rooftop (give the girl Soda Pop)",
+          "locationSlug": "celadon-city",
+          "how": "npc",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "note": "One-time."
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM49",
+      "move": "triattack",
+      "moveName": "Tri Attack",
+      "gen1Name": "Tri Attack",
+      "locations": [
+        {
+          "where": "Celadon Dept. Store rooftop (give the girl Lemonade)",
+          "locationSlug": "celadon-city",
+          "how": "npc",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "note": "One-time."
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": null,
+      "notes": "Only one copy per game."
+    },
+    {
+      "id": "TM50",
+      "move": "substitute",
+      "moveName": "Substitute",
+      "gen1Name": "Substitute",
+      "locations": [
+        {
+          "where": "Rocket Game Corner prize exchange",
+          "locationSlug": "celadon-city",
+          "how": "prize",
+          "price": {
+            "currency": "coins",
+            "amount": 7700
+          },
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-erika",
+          "note": "Can be bought again and again."
+        }
+      ],
+      "reusable": false,
+      "unlimitedSource": "game-corner",
+      "notes": "Unlimited from the Game Corner for coins."
+    },
+    {
+      "id": "HM01",
+      "move": "cut",
+      "moveName": "Cut",
+      "gen1Name": "Cut",
+      "locations": [
+        {
+          "where": "S.S. Anne captain's room",
+          "locationSlug": "ss-anne",
+          "how": "npc",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-misty",
+          "typicalStage": "pre-surge",
+          "note": "Field use needs the Cascade Badge."
+        }
+      ],
+      "reusable": true,
+      "unlimitedSource": null,
+      "notes": "HMs are reusable. In Gen I an HM move can't be deleted (there is no Move Deleter), though Pokemon can still hold other moves alongside it."
+    },
+    {
+      "id": "HM02",
+      "move": "fly",
+      "moveName": "Fly",
+      "gen1Name": "Fly",
+      "locations": [
+        {
+          "where": "Route 16 house, north side (needs Cut)",
+          "locationSlug": "kanto-route-16",
+          "how": "npc",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "note": "Field use needs the Thunder Badge."
+        }
+      ],
+      "reusable": true,
+      "unlimitedSource": null,
+      "notes": "HMs are reusable. In Gen I an HM move can't be deleted (there is no Move Deleter), though Pokemon can still hold other moves alongside it."
+    },
+    {
+      "id": "HM03",
+      "move": "surf",
+      "moveName": "Surf",
+      "gen1Name": "Surf",
+      "locations": [
+        {
+          "where": "Safari Zone Secret House",
+          "locationSlug": "kanto-safari-zone",
+          "how": "npc",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "note": "Field use needs the Soul Badge."
+        }
+      ],
+      "reusable": true,
+      "unlimitedSource": null,
+      "notes": "HMs are reusable. In Gen I an HM move can't be deleted (there is no Move Deleter), though Pokemon can still hold other moves alongside it."
+    },
+    {
+      "id": "HM04",
+      "move": "strength",
+      "moveName": "Strength",
+      "gen1Name": "Strength",
+      "locations": [
+        {
+          "where": "Fuchsia City, Safari Zone Warden's house (bring him the Gold Teeth from the Safari Zone)",
+          "locationSlug": "fuchsia-city",
+          "how": "npc",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-koga",
+          "note": "Field use needs the Rainbow Badge."
+        }
+      ],
+      "reusable": true,
+      "unlimitedSource": null,
+      "notes": "HMs are reusable. In Gen I an HM move can't be deleted (there is no Move Deleter), though Pokemon can still hold other moves alongside it."
+    },
+    {
+      "id": "HM05",
+      "move": "flash",
+      "moveName": "Flash",
+      "gen1Name": "Flash",
+      "locations": [
+        {
+          "where": "Route 2 east gate, Professor Oak's aide (needs 10 Pokemon owned and Cut to reach)",
+          "locationSlug": "kanto-route-2",
+          "how": "npc",
+          "price": null,
+          "versions": [
+            "red",
+            "blue"
+          ],
+          "earliestStage": "pre-surge",
+          "typicalStage": "pre-surge",
+          "note": "Field use needs the Boulder Badge."
+        }
+      ],
+      "reusable": true,
+      "unlimitedSource": null,
+      "notes": "HMs are reusable. In Gen I an HM move can't be deleted (there is no Move Deleter), though Pokemon can still hold other moves alongside it."
+    }
+  ],
+  "mechanicsNotes": [
+    "Gen I has a single Special stat that powers special attacks and defends against them.",
+    "Physical or special depends on the move's type: Normal, Fighting, Flying, Poison, Ground, Rock, Bug and Ghost moves are physical; Fire, Water, Grass, Electric, Ice, Psychic and Dragon moves are special.",
+    "Critical-hit chance is based on base Speed (about base Speed / 512), times 8 for Slash, Razor Leaf, Crabhammer and Karate Chop, so fast Pokemon crit far more often.",
+    "Critical hits double the attacker's level in the damage formula and ignore all stat stages, both good and bad.",
+    "Focus Energy and Dire Hit are bugged: they divide your critical-hit chance by 4 instead of raising it.",
+    "Ghost moves have no effect on Psychic types (the official chart said 2x). The only damaging Ghost moves are Lick and Night Shade (fixed damage), so Ghost gives no real answer to Psychic.",
+    "Psychic types dominate Gen I: Bug moves are weak (Pin Missile, Twineedle, Leech Life), Ghost is useless against them, and Dark and Steel don't exist yet.",
+    "Other Gen I type-chart differences: Bug is super effective against Poison, Poison is super effective against Bug, and Ice is neutral against Fire.",
+    "Badge boosts multiply a stat by 1.125 in battle: Boulder = Attack, Thunder = Defense, Soul = Speed, Volcano = Special. A glitch reapplies them whenever any stat stage changes.",
+    "Obedience for traded Pokemon: up to Lv10 with no badges, 30 with Cascade, 50 with Rainbow, 70 with Marsh, and all levels with Earth.",
+    "Field HMs need badges: Flash = Boulder, Cut = Cascade, Fly = Thunder, Strength = Rainbow, Surf = Soul.",
+    "Hyper Beam skips its recharge turn if it knocks the target out, breaks a Substitute, or misses.",
+    "Wrap, Bind, Fire Spin and Clamp stop the target from acting for 2-5 turns, which makes fast users very strong.",
+    "Every move has an extra 1/256 chance to miss (a 100%-accuracy move hits 255/256 of the time); in English R/B, Swift and Bide skip the accuracy check.",
+    "Freeze never thaws on its own; only a Fire move that can burn, Haze, or an Ice Heal / Full Heal cures it, so Blizzard (90% accuracy, 10% freeze in English R/B) is very strong.",
+    "Sleep lasts 1-7 turns, and the Pokemon can't act on the turn it wakes up.",
+    "Paralysis quarters Speed and gives about a 25% chance each turn of being fully paralyzed.",
+    "Explosion (170 power) and Self-Destruct (130) halve the target's Defense, and in Gen I the user doesn't faint if the move breaks a Substitute.",
+    "Substitute costs 25% of max HP. Using it at exactly 25% HP makes the user faint.",
+    "Toxic's counter also ramps up Leech Seed damage, and in Gen I Toxic reverts to regular poison when the Pokemon switches out.",
+    "Counter only reflects Normal- and Fighting-type damage.",
+    "Night Shade and Seismic Toss deal damage equal to the user's level; Dragon Rage always deals 40 and Sonic Boom always deals 20.",
+    "Reflect and Light Screen double the user's Defense or Special against incoming damage; the effect belongs to that Pokemon (lost on switching or Haze), and critical hits ignore it.",
+    "Gym leaders and the Elite Four use level-up movesets (the last 4 moves learned by their level) plus one signature move written to slot 3 of one Pokemon.",
+    "Traded Pokemon gain 1.5x EXP. The trade evolutions Alakazam, Machamp, Golem and Gengar need a real trade.",
+    "Only one Eevee, one Lapras, one Hitmon, one Mt. Moon fossil and one Old Amber per game; most other statics are one-shot, so a knockout loses them."
+  ],
+  "sources": [
+    "https://pokeapi.co/api/v2/region/kanto",
+    "https://pokeapi.co/api/v2/location/{slug} and /location-area/{area} (Red/Blue encounter methods per Kanto location)",
+    "https://github.com/pret/pokered (data/trainers/parties.asm, data/trainers/special_moves.asm, engine/battle/read_trainer_party.asm, data/pokemon/evos_moves.asm, data/pokemon/base_stats/*.asm, data/wild/maps/*.asm, data/wild/super_rod.asm, data/wild/good_rod.asm, data/events/prizes.asm, data/events/prize_mon_levels.asm, data/events/trades.asm, data/items/marts.asm, data/items/tm_prices.asm, data/maps/objects/*.asm, scripts/*.asm, data/types/type_matchups.asm, engine/battle/core.asm, engine/items/item_effects.asm)",
+    "https://bulbapedia.bulbagarden.net/wiki/Brock (and Misty, Lt._Surge, Erika, Koga, Sabrina, Blaine, Giovanni, Lorelei, Bruno, Agatha, Lance) - Red and Blue party sections",
+    "https://bulbapedia.bulbagarden.net/wiki/Blue_(game)/Red,_Green,_and_Blue",
+    "https://bulbapedia.bulbagarden.net/wiki/List_of_TM_and_HM_locations_in_Generation_I",
+    "https://bulbapedia.bulbagarden.net/wiki/In-game_trade",
+    "https://bulbapedia.bulbagarden.net/wiki/Gift_Pok%C3%A9mon",
+    "https://bulbapedia.bulbagarden.net/wiki/Badge",
+    "https://bulbapedia.bulbagarden.net/wiki/Walkthrough:Pok%C3%A9mon_Red_and_Blue",
+    "https://bulbapedia.bulbagarden.net/wiki/Kanto_Route_2 (and Routes 4, 9, 10, 11, 12, 15, 16, 17, 18, 21, 23, 24, 25; Viridian City, Cerulean City, Celadon City, Saffron City, Vermilion City, Celadon Department Store, Pewter Museum of Science, Pokemon Tower, Seafoam Islands, Kanto Power Plant, Diglett's Cave)",
+    "https://bulbapedia.bulbagarden.net/wiki/Critical_hit, /Focus_Energy_(move), /Hyper_Beam_(move), /Wrap_(move), /Freeze, /Sleep_(status_condition), /Paralysis, /Explosion_(move), /Substitute_(move), /Toxic_(move), /Counter_(move), /Psywave_(move), /Blizzard_(move), /Reflect_(move), /Ghost_(type), /Psychic_(type), /Stat, /Physical_move, /Type/Type_chart, /List_of_battle_glitches_in_Generation_I",
+    "https://play.pokemonshowdown.com/data/moves.json and /data/pokedex.json (ids and move names)"
+  ]
+}
