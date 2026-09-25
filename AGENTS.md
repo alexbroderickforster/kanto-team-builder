@@ -31,6 +31,23 @@ gh pr create --fill                         # opens the PR
 gh pr merge --auto --squash                 # merges by itself once CI is green
 ```
 
+### Ship by default: don't ask
+
+The humans' answer to "should I open a PR / merge it / go back to main?" is **always yes**, so don't ask. When a change is done and passes locally, run the whole flow on your own:
+
+1. Commit, push, `gh pr create --fill`, then `gh pr merge --auto --squash`.
+2. Wait for CI (`gh pr checks --watch`) and confirm the PR merged.
+3. `git switch main && git pull`, and delete the local branch.
+4. Tell the human in one line what merged, with the PR link.
+
+**Stop and ask first only if:**
+- CI fails and the fix isn't obvious, or needs a real decision.
+- There's a merge conflict with someone else's work that needs judgment about whose change wins.
+- The change is risky or hard to undo: deleting features or files, rewriting lots of `data/progression.json`, changing `.github/workflows/`, repo settings or permissions, or anything touching accounts or secrets.
+- You think merging is a bad idea for some other reason. Say why.
+
+Otherwise, just ship it.
+
 - Keep PRs small and focused. Two people plus two agents work in this repo, and small PRs rarely conflict.
 - If `gh pr merge --auto` is waiting and CI fails, fix it on the same branch and push again. The PR updates by itself.
 - If GitHub reports a merge conflict: `git switch main && git pull && git switch - && git merge main`, fix the conflicts, then commit and push.
