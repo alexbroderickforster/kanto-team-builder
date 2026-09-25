@@ -16,6 +16,27 @@ npm run build      # production build into dist/
 
 Before you say a change is done, run `npm run typecheck && npm test && npm run build`. CI runs the same three on every PR.
 
+## Workflow (follow this every time)
+
+`main` is protected: **nobody pushes to it directly**. Every change goes through a pull request. No review is required, but CI must pass before GitHub will merge it. Merging to `main` redeploys the live site.
+
+```bash
+git switch main && git pull                 # start from the latest main
+git switch -c short-descriptive-name        # one branch per change
+# …make the change, then:
+npm run typecheck && npm test && npm run build
+git add -A && git commit -m "What changed and why"
+git push -u origin HEAD
+gh pr create --fill                         # opens the PR
+gh pr merge --auto --squash                 # merges by itself once CI is green
+```
+
+- Keep PRs small and focused. Two people plus two agents work in this repo, and small PRs rarely conflict.
+- If `gh pr merge --auto` is waiting and CI fails, fix it on the same branch and push again. The PR updates by itself.
+- If GitHub reports a merge conflict: `git switch main && git pull && git switch - && git merge main`, fix the conflicts, then commit and push.
+- Never force-push `main`, and don't try to get around the protection. If something is truly stuck, ask the humans.
+- After a merge, the branch is deleted on GitHub automatically. Locally, `git switch main && git pull` and carry on.
+
 ## Layout
 
 ```

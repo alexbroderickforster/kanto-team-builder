@@ -17,16 +17,28 @@ Welcome! This is a small family project, so the process is light.
 
 ## Making a change
 
-1. Create a branch: `git switch -c my-idea`
-2. Make the change. Ask your agent to run `npm run typecheck && npm test && npm run build` before it finishes.
-3. Push and open a pull request:
-   ```bash
-   git push -u origin my-idea
-   gh pr create --fill
-   ```
-4. CI runs automatically on the PR. Once it's green, merge it. Merging to `main` redeploys the live site in about a minute.
+`main` is protected so the live site can't break by accident. Everyone, including Alex, works the same way:
 
-Small fixes can go straight to `main` if you're confident. Just keep CI green.
+1. Start fresh: `git switch main && git pull`
+2. Make a branch: `git switch -c my-idea`
+3. Make the change. Ask your agent to run `npm run typecheck && npm test && npm run build`.
+4. Push and open a pull request that merges itself when the checks pass:
+   ```bash
+   git push -u origin HEAD
+   gh pr create --fill
+   gh pr merge --auto --squash
+   ```
+5. That's it. When CI is green, the PR merges, the branch is cleaned up, and the live site updates about a minute later.
+
+No approvals are needed: you can merge your own PRs. If CI goes red, click into the failed check (or ask your agent to run `gh pr checks`) and push a fix to the same branch.
+
+Easiest of all, just tell your coding agent: "make this change and open a PR with auto-merge". `AGENTS.md` tells it the steps.
+
+## House rules
+
+- Small PRs are easier than big ones, and they rarely collide.
+- Pull `main` before you start something new.
+- If you and Alex both want to change the same area, say so in the family chat first.
 
 ## Good first things to try
 
