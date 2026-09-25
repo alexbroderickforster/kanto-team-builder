@@ -32,7 +32,7 @@ Welcome! This is a small family project, so the process is light.
 
 No approvals are needed: you can merge your own PRs. If CI goes red, click into the failed check (or ask your agent to run `gh pr checks`) and push a fix to the same branch.
 
-Easiest of all, just tell your coding agent: "make this change and open a PR with auto-merge". `AGENTS.md` tells it the steps.
+Easiest of all, just tell your coding agent what you want. `AGENTS.md` tells it to handle the rest without asking: branch, PR, auto-merge, then back to `main`. It will only check with you if CI fails in a confusing way, there's a conflict, or the change is risky.
 
 ## House rules
 
