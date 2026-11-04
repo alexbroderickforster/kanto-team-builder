@@ -2,6 +2,10 @@
 
 A team optimizer for the original Game Boy **Pokémon Red & Blue**, covering the first 151 Pokémon only.
 
+Built as a hands-on teaching project in AI-assisted development, from prompting and interface choices to feature decisions and public hosting.
+
+[Portfolio case study](https://alexbf.com/work/team-lab/)
+
 **Live:** https://alexbroderickforster.github.io/kanto-team-builder/
 
 Pick your version, starter, badges and house rules (no trading, no legendaries, Game Corner, carry HMs). It builds the best six for the next gym or the Elite Four, using real Gen 1 mechanics.
